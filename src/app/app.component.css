@@ -3,4 +3,10 @@ html{
 }
 p{
     font-size: 40px;
+    color: mediumorchid;
+}
+
+h1{
+    color: maroon;
+    text-align: center;
 }
