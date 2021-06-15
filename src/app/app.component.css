@@ -3,4 +3,14 @@ html{
 }
 p{
     font-size: 40px;
+    color: mediumorchid;
+}
+
+h1{
+    color: maroon;
+    text-align: center;
+}
+h2{
+    color: cornflowerblue;
+    text-align: left;
 }
