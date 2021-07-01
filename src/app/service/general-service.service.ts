@@ -20,4 +20,18 @@ export class GeneralService {
   newChannel(channel){
     return this.http.post<any>(this.URL+'/channels',channel)
   }
+  loggedIn(){
+    if (localStorage.getItem('token')) {
+      return true
+    }else{
+      return false
+    }
+  }
+  getToken(){
+    return localStorage.getItem('token');
+  }
+  logout(){
+    localStorage.removeItem('token');
+    this.router.navigate(['/'])
+  }
 }

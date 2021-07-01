@@ -25,11 +25,11 @@ export class LoginComponent implements OnInit {
       .subscribe(
         res=>{
           console.log(res);
-          // let data = JSON.stringify(res);
-          // let dataJson = JSON.parse(data);
-          // localStorage.setItem('token', dataJson.token)
+          let data = JSON.stringify(res);
+          let dataJson = JSON.parse(data);
+          localStorage.setItem('token', dataJson.token)
           
-          // this.router.navigate(['/home']);
+          this.router.navigate(['/home']);
         },
         err=>{
           console.log(err)

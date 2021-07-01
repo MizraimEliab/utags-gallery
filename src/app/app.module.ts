@@ -9,8 +9,8 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { HomeComponent } from './components/home/home.component';
 import { NewChannelComponent } from './components/new-channel/new-channel.component';
-// import { AuthGuard } from './auth.guard';
-// import { TokenInterceptorServiceService } from './service/token-interceptor-service.service';
+import { AuthGuard } from './auth.guard';
+import { TokenInterceptorService } from './service/token-interceptor-service.service';
 import { RootComponent } from './components/root/root.component';
 
 
@@ -32,7 +32,7 @@ import { RootComponent } from './components/root/root.component';
     ReactiveFormsModule
   ],
   providers: [
-    // AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorServiceService, multi: true}
+    AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
 })
