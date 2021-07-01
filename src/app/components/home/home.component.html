@@ -1,2 +1,5 @@
-<p>home works!</p>
-<button (click)="newChannel()" class="btn btn-success">New Channel</button>
+<button (click)="newChannel()" *ngIf="usertype==1" class="btn btn-success">New Channel</button>
+
+<button (click)="viewChannel()" *ngIf="usertype==1" class="btn btn-success">View Channel</button>
+
+<!-- <p *ngIf="type==1">Student</p> -->

@@ -11,7 +11,8 @@ import { HomeComponent } from './components/home/home.component';
 import { NewChannelComponent } from './components/new-channel/new-channel.component';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './service/token-interceptor-service.service';
-import { RootComponent } from './components/root/root.component';
+import { CreatePostComponent } from './components/create-post/create-post.component';
+import { ViewChannelComponent } from './components/view-channel/view-channel.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { RootComponent } from './components/root/root.component';
     SignupComponent,
     HomeComponent,
     NewChannelComponent,
-    RootComponent
+    CreatePostComponent,
+    ViewChannelComponent
   ],
   imports: [
     BrowserModule,

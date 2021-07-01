@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class GeneralService {
+  user_id : number
+  user_type : number
+
 
   readonly URL = 'https://api-utagsgallery-codes.herokuapp.com';
 
@@ -16,9 +19,6 @@ export class GeneralService {
   }
   signIn(User){
     return this.http.post<any>(this.URL+'/users/login',User)
-  }
-  newChannel(channel){
-    return this.http.post<any>(this.URL+'/channels',channel)
   }
   loggedIn(){
     if (localStorage.getItem('token')) {
@@ -34,4 +34,14 @@ export class GeneralService {
     localStorage.removeItem('token');
     this.router.navigate(['/'])
   }
+  getUser(id){
+    return this.http.get<any>(this.URL+'/users/'+`${id}`)
+  }
+  newChannel(channel){
+    return this.http.post<any>(this.URL+'/channels',channel)
+  }
+  getProfile(){
+    return this.http.get<any>(this.URL+'/users/profile')
+  }
+
 }

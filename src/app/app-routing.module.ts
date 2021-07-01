@@ -5,7 +5,8 @@ import {LoginComponent} from './components/login/login.component';
 import {SignupComponent} from './components/signup/signup.component';
 import {NewChannelComponent} from './components/new-channel/new-channel.component';
 import { AuthGuard } from './auth.guard';
-// import { RootComponent } from './components/root/root.component';
+import {ViewChannelComponent} from './components/view-channel/view-channel.component';
+
 
 const routes: Routes = [
 
@@ -30,6 +31,11 @@ const routes: Routes = [
   {
     path:'createNewChannel',
     component: NewChannelComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path:'viewChannel',
+    component: ViewChannelComponent,
     canActivate: [AuthGuard]
   }
 ];

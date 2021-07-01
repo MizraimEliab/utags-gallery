@@ -5,7 +5,7 @@ import { Router } from '@angular/router'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
 
@@ -13,7 +13,6 @@ export class LoginComponent implements OnInit {
     email:'',
     password:'',
   }
-
   constructor(private generalService: GeneralService, private router: Router) { }
 
   ngOnInit(): void {
@@ -27,7 +26,10 @@ export class LoginComponent implements OnInit {
           console.log(res);
           let data = JSON.stringify(res);
           let dataJson = JSON.parse(data);
+          // console.log('Prueba '+res.usertype);
+          
           localStorage.setItem('token', dataJson.token)
+          // localStorage.setItem('type', dataJson.usertype)
           
           this.router.navigate(['/home']);
         },
