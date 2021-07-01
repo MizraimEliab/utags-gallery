@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './component/home/home.component';
-import {LoginComponent} from './components/login/login.component'
-import {SignupComponent} from './components/signup/signup.component'
+import { HomeComponent } from './components/home/home.component';
+import {LoginComponent} from './components/login/login.component';
+import {SignupComponent} from './components/signup/signup.component';
+import {NewChannelComponent} from './components/new-channel/new-channel.component';
+// import { AuthGuard } from './auth.guard';
+import { RootComponent } from './components/root/root.component';
 
 const routes: Routes = [
+
   {
     path: '',
-    redirectTo: '/signin',
-    pathMatch: 'full'
+    component: RootComponent
   },
   {
     path: 'signin',
@@ -21,6 +24,10 @@ const routes: Routes = [
   {
     path:'home',
     component: HomeComponent
+  },
+  {
+    path:'createNewChannel',
+    component: NewChannelComponent
   }
 ];
 

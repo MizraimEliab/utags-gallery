@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                New Channel
+            </div>
+            <div class="card-body">
+                <form (submit)="createNewChannel()">
+                    <div class="form-group form-outline mb-4">
+                        <input type="text" [(ngModel)]="channel.name" name="name" class="form-control" placeholder="Name" required autofocus>
+                    </div>
+                    <div class="form-group form-outline mb-4">
+                        <input type="text" [(ngModel)]="channel.description" name="description" class="form-control" placeholder="Description" required>
+                    </div>                 
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="submit">Create new channel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

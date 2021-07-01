@@ -10,7 +10,7 @@ import { Router } from '@angular/router'
 export class LoginComponent implements OnInit {
 
   user = {
-    username:'',
+    email:'',
     password:'',
   }
 
@@ -18,13 +18,18 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
   signIn(){
-    // console.log(this.user)
+    console.log(this.user)
     this.generalService.signIn(this.user)
       .subscribe(
         res=>{
-          this.router.navigate(['/home']);
+          console.log(res);
+          // let data = JSON.stringify(res);
+          // let dataJson = JSON.parse(data);
+          // localStorage.setItem('token', dataJson.token)
+          
+          // this.router.navigate(['/home']);
         },
         err=>{
           console.log(err)
