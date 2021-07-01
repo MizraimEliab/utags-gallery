@@ -13,6 +13,7 @@ import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './service/token-interceptor-service.service';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { ViewChannelComponent } from './components/view-channel/view-channel.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ViewChannelComponent } from './components/view-channel/view-channel.com
     HomeComponent,
     NewChannelComponent,
     CreatePostComponent,
-    ViewChannelComponent
+    ViewChannelComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

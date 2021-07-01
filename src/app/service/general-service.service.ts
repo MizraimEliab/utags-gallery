@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 export class GeneralService {
   user_id : number
   user_type : number
-
+  user_name: string
+  user_channel: any
 
   readonly URL = 'https://api-utagsgallery-codes.herokuapp.com';
 
@@ -40,8 +41,19 @@ export class GeneralService {
   newChannel(channel){
     return this.http.post<any>(this.URL+'/channels',channel)
   }
+  getChannel(id){
+    return this.http.get<any>(this.URL+'/channels/'+`${id}`)
+  }
   getProfile(){
     return this.http.get<any>(this.URL+'/users/profile')
   }
-
+  getPosts(){
+    return this.http.get<any>(this.URL+'/posts')
+  }
+  newPost(newpost){
+    return this.http.post<any>(this.URL+'/posts',newpost)
+  }
+  postLiked(idPost){
+    return this.http.put<any>(this.URL+'/posts/like/'+`${idPost}`,'')
+  }
 }

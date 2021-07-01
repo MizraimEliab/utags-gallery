@@ -8,38 +8,18 @@ import { GeneralService } from '../../service/general-service.service'
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  // @Input() user_id : number
   usertype : number
   userId : number
+  userChannel: boolean
   arrUser: any[]
+  arrPost: any[]
 
-  constructor(private router: Router, private generalService : GeneralService) {
+  constructor(private generalService : GeneralService) {
    }
 
   ngOnInit(): void {
     this.getUser();
-  }
-
-  newChannel(){
-    this.router.navigate(['createNewChannel']);  
-  }
-  // getUser(){
-  //   let id = 3
-  //   this.generalService.getUser(id)
-  //   .subscribe(
-  //     res=>{
-  //       let data = JSON.stringify(res);
-  //       let dataJson = JSON.parse(data);
-  //       this.usertype = dataJson[0].usertype;
-  //       console.log('usuario '+dataJson[0].usertype)
-  //     },
-  //     err=>{
-  //       console.log(err)
-  //     }
-  //   )
-  // }
-  viewChannel(){
-    this.router.navigate(['viewChannel']);  
+    this.getPosts();
   }
   getUser(){
     this.generalService.getProfile()
@@ -51,13 +31,36 @@ export class HomeComponent implements OnInit {
       .subscribe(res =>{
         console.log('los values del user: '+JSON.stringify(res));
         this.arrUser = res
-        console.log(this.arrUser);
         this.generalService.user_id = this.arrUser[0].user_id
         this.generalService.user_type = this.arrUser[0].usertype     
-          // console.log('variable 1 '+this.generalService.user_id+'variable 2 '+this.generalService.user_type)         
-
+        this.generalService.user_name = this.arrUser[0].name
+        this.usertype = this.generalService.user_type 
+        this.generalService.getChannel(this.userId)
+        .subscribe(res=>{
+          // this.generalService.user_channel = res
+          // this.userChannel = res
+          console.log("ChannelID: " + JSON.stringify(res))
+          // if(!isNaN(res)){
+          //   console.log("Hay canal")
+          // }else{
+          //   console.log("No Hay canal")
+          // }
+        })  
       });
     });
+  }
+  getPosts(){
+    this.generalService.getPosts()
+    .subscribe(res=>{
+      this.arrPost = res
+    })
+  }
+  likePost(id){
+    this.generalService.postLiked(id)
+    .subscribe(res=>{
+      console.log(res)
+      this.getPosts()
+    })
   }
 
 }

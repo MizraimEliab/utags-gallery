@@ -8,26 +8,30 @@ import { GeneralService } from '../../service/general-service.service'
   styleUrls: ['./view-channel.component.css']
 })
 export class ViewChannelComponent implements OnInit {
+
   usertype : number
+  post= {
+    channel_id: '4',
+    title: '',
+    content: ''
+  }
+
   constructor(private generalService : GeneralService, private router : Router) { }
 
   ngOnInit(): void {
-    this.getUser();
   }
 
-  getUser(){
-    let id = 3
-    this.generalService.getUser(id)
-    .subscribe(
-      res=>{
-        let data = JSON.stringify(res);
-        let dataJson = JSON.parse(data);
-        this.usertype = dataJson[0].usertype;
-        console.log('usuario '+dataJson[0].usertype)
-      },
-      err=>{
-        console.log(err)
-      }
-    )
+  newPost(){
+    console.log(this.post)
+    this.generalService.newPost(this.post)
+      .subscribe(
+        res=>{
+          console.log(res)
+          this.router.navigate(['home'])
+        },
+        err=>{
+          console.log(err)
+        }
+      )
   }
 }

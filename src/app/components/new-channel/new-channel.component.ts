@@ -12,7 +12,7 @@ export class NewChannelComponent implements OnInit {
   constructor(private generalService: GeneralService, private router: Router) { }
 
   channel = {
-    user_id:'1',
+    user_id:0,
     name:'',
     description:''
   }
@@ -22,7 +22,11 @@ export class NewChannelComponent implements OnInit {
 
   createNewChannel(){
     console.log(JSON.stringify(this.channel));
-    this.generalService.newChannel(this.channel)
+    this.generalService.getProfile()
+    .subscribe(res=>{
+      console.log('El id del user es : '+JSON.stringify(res));
+      this.channel.user_id = res.user_id
+      this.generalService.newChannel(this.channel)
       .subscribe(
         res=>{
           console.log(res)
@@ -32,6 +36,7 @@ export class NewChannelComponent implements OnInit {
           console.log(err)
         }
       )
+    })
   }
 
 }

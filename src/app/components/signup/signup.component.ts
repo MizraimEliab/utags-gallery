@@ -37,8 +37,6 @@ export class SignupComponent implements OnInit {
     if(this.user.name == "" || this.user.lastname == "" || this.user.email == "" || this.user.password == "" || this.esEmailValido(this.user.email) == false){
       console.log("Error")
     }else{
-      // let userType = this.user.email.slice(0, 6);
-      // console.log(userType);
       //1 Admin - 2 Student
       console.log("User: " + JSON.stringify(this.user))
       this.generalService.signUp(this.user)
@@ -51,35 +49,6 @@ export class SignupComponent implements OnInit {
           console.log(err)
         }
       )
-      // if(!isNaN(Number(userType))){
-      //   console.log("Student");
-      //   this.user.userType='2';
-      //   console.log("User Student: " + JSON.stringify(this.user))
-      //   this.generalService.signUp(this.user)
-      //   .subscribe(
-      //     res=>{
-      //       console.log(res)
-      //       this.router.navigate(['signin']);
-      //     },
-      //     err=>{
-      //       console.log(err)
-      //     }
-      //   )
-      // }else{
-      //   console.log("Admin")
-      //   this.user.userType='1';
-      //   console.log("User Admin: " + JSON.stringify(this.user))
-      //   this.generalService.signUp(this.user)
-      //   .subscribe(
-      //     res=>{
-      //       console.log(res)
-      //       this.router.navigate(['signin']);
-      //     },
-      //     err=>{
-      //       console.log(err)
-      //     }
-      //   )
-      // }
     }
   }
 
