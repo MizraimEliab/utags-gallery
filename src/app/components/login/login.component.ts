@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../../services/auth.service';
+import {GeneralService} from '../../service/general-service.service';
 import { Router } from '@angular/router'
 
 @Component({
@@ -14,14 +14,14 @@ export class LoginComponent implements OnInit {
     password:'',
   }
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private generalService: GeneralService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   signIn(){
     // console.log(this.user)
-    this.authService.signIn(this.user)
+    this.generalService.signIn(this.user)
       .subscribe(
         res=>{
           this.router.navigate(['/home']);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { GeneralService } from '../../service/general-service.service';
 import { Router } from '@angular/router'
 
 @Component({
@@ -18,7 +18,7 @@ export class SignupComponent implements OnInit {
   }
   
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private generalService: GeneralService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -44,7 +44,7 @@ export class SignupComponent implements OnInit {
         console.log("Student")
         this.user.userType='2';
         console.log("User Student: " + JSON.stringify(this.user))
-        // this.authService.signUp(this.user)
+        // this.generalService.signUp(this.user)
         // .subscribe(
         //   res=>{
         //     console.log(res)
@@ -58,7 +58,7 @@ export class SignupComponent implements OnInit {
         console.log("Admin")
         this.user.userType='1';
         console.log("User Admin: " + JSON.stringify(this.user))
-        // this.authService.signUp(this.user)
+        // this.generalService.signUp(this.user)
         // .subscribe(
         //   res=>{
         //     console.log(res)
