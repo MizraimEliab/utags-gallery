@@ -8,6 +8,7 @@ import { Router } from '@angular/router'
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  htmlSnippet: string = "<script>maliciousCode()</script>";
 
   user = {
     email:'',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  signIn(){
+  signIn(){    
+    
     console.log(this.user)
     this.generalService.signIn(this.user)
       .subscribe(
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit {
           console.log(err)
         }
       )
+      
   }
 
 }

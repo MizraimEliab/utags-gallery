@@ -14,6 +14,10 @@ import { TokenInterceptorService } from './service/token-interceptor-service.ser
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { ViewChannelComponent } from './components/view-channel/view-channel.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { TagsComponent } from './components/tags/tags.component';
+import { FavComponent } from './components/fav/fav.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 
 @NgModule({
@@ -25,7 +29,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     NewChannelComponent,
     CreatePostComponent,
     ViewChannelComponent,
-    NavbarComponent
+    NavbarComponent,
+    TagsComponent,
+    FavComponent,
+    ProfileComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,
