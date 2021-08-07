@@ -9,12 +9,13 @@
   justify-content: center;
 }
 .example-sidenav {
-    user-select: none;
+  user-select: none;
 }
 .full-width {
   width: 100%;
 }
 .menu-button {
+  padding-right: 20px;
   transition: 300ms ease-in-out;
   transform: rotate(0deg);
 }

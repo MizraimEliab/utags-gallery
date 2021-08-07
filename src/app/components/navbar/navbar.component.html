@@ -6,12 +6,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-        <!-- <li class="nav-item">
-          <a class="nav-link" *ngIf="usertype==1" routerLink="/createNewChannel" routerLinkActive="active">Create New Channel</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" *ngIf="usertype==1" routerLink="/viewChannel" routerLinkActive="active">View Channel</a>
-        </li> -->
         <li class="nav-item">
           <a class="nav-link" *ngIf="logged" routerLink="/viewChannel" (click)="logOut()" routerLinkActive="active">LogOut</a>
         </li>

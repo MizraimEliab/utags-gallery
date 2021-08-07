@@ -5,34 +5,75 @@
 		<mat-icon mat-list-icon>exit_to_app</mat-icon>
 	</button>
 </mat-toolbar>
-<mat-sidenav-container class="example-container" autosize>
+<mat-sidenav-container class="example-container">
 	<mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
 		<mat-nav-list>
-			<mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
-				<span class="full-width" *ngIf="isExpanded || isShowing">General</span>
+			<mat-list-item class="parent">
+				<span class="full-width" *ngIf="isExpanded || isShowing" (click)="home()">Home</span>
 				<mat-icon mat-list-icon>home</mat-icon>
+				<!-- <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon> -->
+			</mat-list-item>
+			<mat-list-item class="parent">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Profile</span>
+				<mat-icon mat-list-icon>person_outline</mat-icon>
+			</mat-list-item>
+			<mat-list-item class="parent" *ngIf="usertype==1">
+				<span class="full-width">My Channel</span>
+				<mat-icon mat-list-icon>tv</mat-icon>
+			</mat-list-item>
+			<mat-list-item class="parent">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Favorites</span>
+				<mat-icon mat-list-icon>star</mat-icon>
+			</mat-list-item>
+			<mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Tags</span>
+				<mat-icon mat-list-icon>local_offer</mat-icon>
 				<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
 			</mat-list-item>
 			<div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
-				<a mat-list-item href="...">Profile</a>
-				<a mat-list-item href="...">View Channel</a>
-				<a mat-list-item href="...">Create Channel</a>
-				<mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
-					<span class="full-width" *ngIf="isExpanded || isShowing">Tags</span>
-					<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
-				</mat-list-item>
-				<div class="submenu" [ngClass]="{'expanded' : showSubSubMenu}" *ngIf="isShowing || isExpanded">
-					<mat-list-item>SubSubmenu Item 1</mat-list-item>
-					<mat-list-item>SubSubmenu Item 2</mat-list-item>
+				<a mat-list-item data-bs-toggle="modal" data-bs-target="#exampleModal">Add Tag<mat-icon mat-list-icon>add</mat-icon></a>
+				<div *ngFor="let item of arrTags">
+					<a mat-list-item data-bs-toggle="modal" data-bs-target="#exampleModal">{{item.name | titlecase}}</a>
 				</div>
 			</div>
 		</mat-nav-list>
-    <mat-nav-list>
-</mat-nav-list>
 	</mat-sidenav>
-
 	<div class="example-sidenav-content">
 		<app-posts></app-posts>
-	</div>
-
+		<!-- <router-outlet></router-outlet> -->
+	</div> 
 </mat-sidenav-container>
+  
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="modal-title" id="exampleModalLabel">Add New Tag</h2>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form (submit)="addTag()" name="formRecipe" #formRecipe="ngForm">
+					<div class="form-group form-outline mb-4">
+						<label for="exampleInputEmail1" class="form-label">Tag Name</label>
+						<input [(ngModel)]="color.name" #name type="text" class="form-control" name="name" placeholder="Put the tag name" required>
+					</div>
+					<div class="form-group form-outline mb-4">
+						<div class="row g-3 align-items-center">
+							<div class="col-auto">
+								<label for="inputPassword6" class="col-form-label">Select Color</label>
+							</div>
+							<div class="col-auto">
+								<input [(ngModel)]="color.color" type="color" class="" name="color" value="#000000" required>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-bs-dismiss="modal" >Cancel</button>
+						<button type="submit" class="btn btn-primary">Add Tag</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

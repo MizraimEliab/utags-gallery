@@ -6,6 +6,7 @@ import {SignupComponent} from './components/signup/signup.component';
 import {NewChannelComponent} from './components/new-channel/new-channel.component';
 import { AuthGuard } from './auth.guard';
 import {ViewChannelComponent} from './components/view-channel/view-channel.component';
+import { PostsComponent } from './components/posts/posts.component';
 
 
 const routes: Routes = [

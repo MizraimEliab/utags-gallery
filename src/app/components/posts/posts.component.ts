@@ -13,6 +13,7 @@ export class PostsComponent implements OnInit {
   userChannel: boolean
   arrUser: any[]
   arrPost: any[]
+  arrTags: any[]
 
   constructor(private generalService : GeneralService) { }
 
@@ -27,6 +28,7 @@ export class PostsComponent implements OnInit {
       console.log(res);
       console.log('El id del user es : '+JSON.stringify(res));
       this.userId = res['user_id'];
+      this.getAllTags()
       this.generalService.getUser(this.userId)
       .subscribe(res =>{
         console.log('los values del user: '+JSON.stringify(res));
@@ -54,6 +56,19 @@ export class PostsComponent implements OnInit {
       console.log(res)
       this.getPosts()
     })
+  }
+
+  getAllTags(){
+    // console.log(this.userId)
+    this.generalService.getTagsUser(this.userId)
+      .subscribe(
+        res=>{
+          this.arrTags = res
+        },
+        err=>{
+          console.log(err)
+        }
+      )
   }
 
 }

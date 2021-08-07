@@ -65,4 +65,10 @@ export class GeneralService {
   postLiked(idPost){
     return this.http.put<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/posts/like/'+`${idPost}`,'')
   }
+  addTag(tag){
+    return this.http.post<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/tags',tag);
+  }
+  getTagsUser(id){
+    return this.http.get<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/tags/all/'+`${id}`)
+  }
 }
