@@ -7,7 +7,8 @@ import {NewChannelComponent} from './components/new-channel/new-channel.componen
 import { AuthGuard } from './auth.guard';
 import {ViewChannelComponent} from './components/view-channel/view-channel.component';
 import { PostsComponent } from './components/posts/posts.component';
-
+import { ProfileComponent } from './components/profile/profile.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 const routes: Routes = [
 
@@ -37,6 +38,16 @@ const routes: Routes = [
   {
     path:'viewChannel',
     component: ViewChannelComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path:'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path:'comments',
+    component: CommentsComponent,
     canActivate: [AuthGuard]
   }
 ];

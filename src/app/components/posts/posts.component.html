@@ -3,26 +3,26 @@
 
 <div class="card m-5" *ngFor="let item of arrPost">
   <div class="card-header text-center text-uppercase fs-4 fw-bold">
-    {{item.title}}
+    <button type="button" class="btn btn-light" (click)="redirectToComment()"><h2>{{item.title}}</h2></button>
     <button class="fixedbutton" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <div *ngFor="let item of arrTags">
-        <button mat-menu-item >
+      <div *ngFor="let x of arrTags">
+        <button mat-menu-item (click)="addTagToPost(x.tag_id,item.post_id)">
           <mat-icon >local_offer</mat-icon>
-          <span >{{item.name | titlecase}}</span>
+          <span >{{x.name | titlecase}}</span>
         </button>
       </div>
     </mat-menu>
-    <br><br>
   </div>
   <div class="card-body">
     <p class="card-title text-end fs-5">Channel: {{item.channel_id}}</p>
     <p class="card-text fs-5">{{item.content}}</p>
     <div class="col text-end">
+      <button type="button" class="btn btn-link" (click)="redirectToComment()">View Comments</button>
       <button class="btn btn-primary" (click)="likePost(item.post_id)"><i class="far fa-thumbs-up"></i> {{item.likes}}</button>
     </div>
   </div>
-  <br><br><br><br>
+  <br><br>
 </div>
