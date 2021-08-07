@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GeneralService } from '../../service/general-service.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-posts',
@@ -14,8 +15,9 @@ export class PostsComponent implements OnInit {
   arrUser: any[]
   arrPost: any[]
   arrTags: any[]
+  body: any
 
-  constructor(private generalService : GeneralService) { }
+  constructor(private generalService : GeneralService, private router: Router) { }
 
   ngOnInit(): void {
     this.getUser();
@@ -69,6 +71,28 @@ export class PostsComponent implements OnInit {
           console.log(err)
         }
       )
+  }
+
+  addTagToPost(tag_id, post_id){
+    this.body = {
+      tag_id: tag_id,
+      post_id : post_id
+    }
+    console.log(this.body);
+    
+    this.generalService.addTagToPost(this.body)
+      .subscribe(
+        res=>{
+          console.log(res);          
+        },
+        err=>{
+          console.log(err)
+        }
+      )
+  }
+
+  redirectToComment(){
+    this.router.navigate(['/comments']);
   }
 
 }

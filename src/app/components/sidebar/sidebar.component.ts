@@ -53,6 +53,10 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['/viewChannel']);
   }
 
+  profile(){
+    this.router.navigate(['/profile']);
+  }
+
   home(){
     this.router.navigate(['/home']);
   }
@@ -96,9 +100,10 @@ export class SidebarComponent implements OnInit {
           console.log("Data Tag" + data);
           Swal.fire({
             icon: 'success',
-            title: 'Your work has been saved',
-            showConfirmButton: false,
-            timer: 1500
+            title: 'Your tag has been saved!',
+            showConfirmButton: true,
+          }).then((result) => {
+            window.location.reload();
           })
         },
         err=>{
