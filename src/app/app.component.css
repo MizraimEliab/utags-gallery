@@ -1,3 +1,6 @@
+* {
+    overflow: hidden; /* Hide scrollbars */
+  }
 html{
     background-color: black;
 }

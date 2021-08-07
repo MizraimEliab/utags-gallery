@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from './material.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,9 @@ import { TagsComponent } from './components/tags/tags.component';
 import { FavComponent } from './components/fav/fav.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PostsComponent } from './components/posts/posts.component';
 
 
 @NgModule({
@@ -33,7 +37,9 @@ import { CommentsComponent } from './components/comments/comments.component';
     TagsComponent,
     FavComponent,
     ProfileComponent,
-    CommentsComponent
+    CommentsComponent,
+    SidebarComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +47,9 @@ import { CommentsComponent } from './components/comments/comments.component';
     FormsModule,
     HttpClientModule,    
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [
     AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true}
