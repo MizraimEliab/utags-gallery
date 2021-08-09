@@ -35,7 +35,9 @@ export class PostsComponent implements OnInit {
       this.generalService.getUser(this.userId)
       .subscribe(res =>{
         console.log('los values del user: '+JSON.stringify(res));
-        this.arrUser = res
+        const json = JSON.stringify(res)
+          const datajson = JSON.parse(json);
+        this.arrUser = datajson
         this.generalService.user_id = this.arrUser[0].user_id
         this.generalService.user_type = this.arrUser[0].usertype     
         this.generalService.user_name = this.arrUser[0].name
@@ -50,7 +52,13 @@ export class PostsComponent implements OnInit {
   getPosts(){
     this.generalService.getPosts()
     .subscribe(res=>{
-      this.arrPost = res
+      const json = JSON.stringify(res)
+      const datajson = JSON.parse(json);
+      this.arrPost = datajson
+      console.log('**********');
+      console.log(this.arrPost);
+      
+      
     })
   }
   likePost(id){
@@ -66,7 +74,9 @@ export class PostsComponent implements OnInit {
     this.generalService.getTagsUser(this.userId)
       .subscribe(
         res=>{
-          this.arrTags = res
+          const json = JSON.stringify(res)
+          const datajson = JSON.parse(json);
+          this.arrTags = datajson
         },
         err=>{
           console.log(err)

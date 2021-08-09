@@ -8,17 +8,39 @@ import { GeneralService } from '../../service/general-service.service'
   styleUrls: ['./view-channel.component.css']
 })
 export class ViewChannelComponent implements OnInit {
-
+  ListImages: any [];
   usertype : number
   post= {
-    channel_id: '4',
+    channel_id: 4,
     title: '',
+    image_url: '',
     content: ''
   }
 
   constructor(private generalService : GeneralService, private router : Router) { }
 
   ngOnInit(): void {
+  }
+
+  getURL(url:string){
+    console.log(url);
+    this.post.image_url = url;
+    console.log(this.post);
+    
+  }
+
+  getImagesPixabay(word:string){
+    
+    this.generalService.getImagesPixabay(word)
+    .subscribe(res=>{
+      console.log('*******************');
+      const json = JSON.stringify(res)
+      const datajson = JSON.parse(json);
+      //console.log(datajson.images);
+      this.ListImages = datajson.images;
+      console.log(this.ListImages);
+      
+    })
   }
 
   newPost(){

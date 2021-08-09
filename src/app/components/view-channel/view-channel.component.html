@@ -3,12 +3,13 @@
 
 <div class="example-button-container">
     <button mat-fab color="primary" aria-label="Example icon button with a delete icon">
-        <mat-icon>add</mat-icon>
+        <!-- <mat-icon>add</mat-icon> -->
+        <mat-icon mat-list-item data-bs-toggle="modal" data-bs-target="#exampleModal" mat-list-icon>add</mat-icon>
     </button>
 </div>
 
 
-<div class="row mt-5">
+<!-- <div class="row mt-5">
     <div class="col-md-4 mx-auto">
         <div class="card">
             <div class="card-header">
@@ -16,12 +17,17 @@
             </div>
             <div class="card-body">
                 <form (submit)="newPost()">
+                    
                     <div class="form-group form-outline mb-4">
                         <input type="text" [(ngModel)]="post.title" name="title" class="form-control" placeholder="Title" required>
                     </div>
-                    <div class="form-group form-outline mb-4">
-                        <input type="text" [(ngModel)]="post.content" name="content" class="form-control" placeholder="Content" required>
+                    <div  class="form-group form-outline mb-4">
+                        <input type="text" [(ngModel)]="post.image" name="image" class="form-control" placeholder="Search image (opcional)" required>
                     </div>
+                    <div class="form-group form-outline mb-4">
+                        <textarea type="text" [(ngModel)]="post.content" name="content" class="form-control" placeholder="Content" required></textarea>
+                    </div>
+                    
                     <div class="d-grid gap-2">
                         <button class="btn btn-primary" type="submit">Create new post</button>
                     </div>
@@ -29,6 +35,50 @@
             </div>
         </div>
     </div>
+</div> -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="modal-title" id="exampleModalLabel">Add New Post</h2>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form (submit)="newPost()" name="formRecipe" #formRecipe="ngForm">
+					<div class="form-group form-outline mb-4">
+						<label for="exampleInputEmail1" class="form-label">Post title</label>
+						<input [(ngModel)]="post.title"  type="text" class="form-control" name="title" placeholder="Post title" required>
+					</div>
+                    <div class="form-group form-outline mb-4">
+						<label for="exampleInputEmail1" class="form-label">Post image</label>
+						<input style="width: 80%;" [(ngModel)]="post.image_url"  type="text" class="form-control" name="image_url" placeholder="Post image (opcional)" required> <a  class="btn btn-primary" (click)="getImagesPixabay(post.image_url)"><mat-icon >search</mat-icon></a> 
+					</div>
+                    <!-- aqui ponemos la images -->
+                    <div class="row">
+                        <div class="column" *ngFor="let x of ListImages">
+                            <a (click)="getURL(x)"><img src="{{x}}" alt="" style="width: 100%;"></a>
+                        </div>
+                    </div>
+    
+
+                    <div class="form-group form-outline mb-4">
+						<label for="exampleInputEmail1" class="form-label">Post content</label>
+						<textarea [(ngModel)]="post.content"  type="text" class="form-control" name="content" placeholder="Post content" required></textarea>
+					</div>
+                    
+                    
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-bs-dismiss="modal" >Cancel</button>
+						<div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Create new post</button>
+                        </div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
 
 <h1 class="text-center mt-5">My Posts</h1>

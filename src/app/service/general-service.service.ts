@@ -74,4 +74,7 @@ export class GeneralService {
   addTagToPost(tag){
     return this.http.post<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/tags/insert/tag',tag)
   }
+  getImagesPixabay(word){
+    return this.http.get<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/posts/images/'+`${word}`)
+  }
 }
