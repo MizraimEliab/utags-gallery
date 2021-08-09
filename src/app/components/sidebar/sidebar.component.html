@@ -17,7 +17,7 @@
 				<span class="full-width" *ngIf="isExpanded || isShowing">Profile</span>
 				<mat-icon mat-list-icon>person_outline</mat-icon>
 			</mat-list-item>
-			<mat-list-item class="parent" *ngIf="usertype==1">
+			<mat-list-item class="parent" *ngIf="usertype==1" (click)="channel()">
 				<span class="full-width">My Channel</span>
 				<mat-icon mat-list-icon>tv</mat-icon>
 			</mat-list-item>

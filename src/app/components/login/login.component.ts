@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GeneralService} from '../../service/general-service.service';
 import { Router } from '@angular/router'
+import Swal from 'sweetalert2/dist/sweetalert2.js';  
 
 @Component({
   selector: 'app-login',
@@ -19,27 +20,45 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  signIn(){    
-    
-    console.log(this.user)
-    this.generalService.signIn(this.user)
+  signIn(){
+    // console.log(this.user)    
+    if(this.user.email == '' || this.user.password == ''){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Email or password are empty!'
+      })
+    }else{
+      this.generalService.signIn(this.user)
       .subscribe(
         res=>{
-          console.log(res);
-          let data = JSON.stringify(res);
-          let dataJson = JSON.parse(data);
-          // console.log('Prueba '+res.usertype);
-          
-          localStorage.setItem('token', dataJson.token)
-          // localStorage.setItem('type', dataJson.usertype)
-          
-          this.router.navigate(['/home']);
+          if(res.Message == 'Something is wrong'){
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Email or password are wrong!'
+            })
+          }else{
+            let data = JSON.stringify(res);
+            let dataJson = JSON.parse(data);          
+            localStorage.setItem('token', dataJson.token)
+            Swal.fire({
+              icon: 'success',
+              title: 'Welcome!'
+            })        
+            this.router.navigate(['/home']);
+          }
         },
         err=>{
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Error!'
+          })
           console.log(err)
         }
       )
-      
+    }      
   }
 
 }

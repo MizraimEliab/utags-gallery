@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GeneralService } from '../../service/general-service.service'
 import { Router } from '@angular/router'
+import Swal from 'sweetalert2/dist/sweetalert2.js';  
 
 @Component({
   selector: 'app-posts',
@@ -83,10 +84,19 @@ export class PostsComponent implements OnInit {
     this.generalService.addTagToPost(this.body)
       .subscribe(
         res=>{
-          console.log(res);          
+          console.log(res);
+          Swal.fire({
+            icon: 'success',
+            title: 'Post added successfully!'
+          })          
         },
         err=>{
           console.log(err)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Error!'
+          })
         }
       )
   }
