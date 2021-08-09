@@ -77,4 +77,12 @@ export class GeneralService {
   getImagesPixabay(word){
     return this.http.get<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/posts/images/'+`${word}`)
   }
+
+  postComment(comment){
+    return this.http.post<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/comments',comment)
+  }
+
+  getCommetsByPost(post_id){
+    return this.http.get<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/comments/'+`${post_id}`)
+  }
 }

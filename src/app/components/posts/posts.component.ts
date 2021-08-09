@@ -16,13 +16,18 @@ export class PostsComponent implements OnInit {
   arrUser: any[]
   arrPost: any[]
   arrTags: any[]
+
+  arrComments: any[]
   body: any
+  comments:any;
+  comment:string;
 
   constructor(private generalService : GeneralService, private router: Router) { }
 
   ngOnInit(): void {
     this.getUser();
     this.getPosts();
+    // this.getComments();
   }
 
   getUser(){
@@ -42,6 +47,8 @@ export class PostsComponent implements OnInit {
         this.generalService.user_type = this.arrUser[0].usertype     
         this.generalService.user_name = this.arrUser[0].name
         this.usertype = this.generalService.user_type 
+        console.log(this.generalService.user_id);
+        
         this.generalService.getChannel(this.userId)
         .subscribe(res=>{
           console.log("ChannelID: " + JSON.stringify(res))
@@ -109,6 +116,27 @@ export class PostsComponent implements OnInit {
           })
         }
       )
+  }
+
+  Comment(post_id:number){
+    this.comments = {
+      user_id: this.generalService.user_id,
+      post_id: post_id,
+      comment: this.comment
+    }
+    this.generalService.postComment(this.comments)
+    .subscribe(res=>{
+    });
+  }
+
+
+  getComments(post_id){
+    this.generalService.getCommetsByPost(post_id)
+    .subscribe(res=>{
+      const json = JSON.stringify(res)
+      const datajson = JSON.parse(json);
+      this.arrComments = datajson
+    })
   }
 
   redirectToComment(){
