@@ -49,25 +49,20 @@ export class TagsComponent implements OnInit {
   }
 
   getTagData(){
-    console.log("***********TagID " + this.tagID)
     this.generalService.getTag(this.tagID)
     .subscribe(res=>{
-      console.log("///////////////")
       this.tagName = res[0].name
-      console.log("------------ " + this.tagName)
+    },
+    err=>{
+      console.log(err)
     })
   }
 
 
   getPosts(){
-    console.log('mi pichula identifica');
-    
-    console.log(this.tagID)
     this.generalService.getTagsPost(this.tagID)
     .subscribe(res=>{
-      console.log("*************")
       this.arrPosts = res
-      console.log(res)
       if(res.code == "404"){
         Swal.fire({
           icon: 'warning',
@@ -77,6 +72,9 @@ export class TagsComponent implements OnInit {
           window.location.href = "/home";
         })
       }
+    },
+    err=>{
+      console.log(err)
     })
   }
 
@@ -114,51 +112,46 @@ export class TagsComponent implements OnInit {
 
   loggedIn(){
     this.logged = this.generalService.loggedIn()
-    console.log("Logged: " + this.logged)
   }
+
   logOut(){
     this.generalService.logout();
   }
 
   redirectToTag(id){
-    console.log("id" + id)
     this.router.navigate(['/tags/',id])
     this.getTagID()
     this.getTagData()
     this.getPosts()
-    console.log('tagID ' + this.tagID)   
-    console.log('tagName' + this.tagName)
   }
 
   getAllTags(){
-    // console.log('a mi pichulaaaaaaaaaaaaaaa');
-    
-    // console.log(this.generalService.user_id)
     this.generalService.getTagsUser(this.generalService.user_id)
-      .subscribe(
-        res=>{
-          this.arrTags = res
-          console.log('*****aaaaaa mi pichulaaaaaaaaaa*****');
-          console.log(res);
-          
-          
-        },
-        err=>{
-          console.log(err)
-        }
-      )
+    .subscribe(
+      res=>{
+        this.arrTags = res
+      },
+      err=>{
+        console.log(err)
+      }
+    )
   }
 
   getUserType(){
     this.generalService.getProfile()
     .subscribe(res =>{
       this.userId = res['user_id'];
-      // this.getAllTags();
       this.generalService.getUser(this.userId)
       .subscribe(res =>{
         this.arrUser = res
         this.usertype = this.arrUser[0].usertype
+      },
+      err=>{
+        console.log(err)
       });
+    },
+    err=>{
+      console.log(err)
     });
   }
 }

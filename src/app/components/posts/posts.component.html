@@ -1,67 +1,41 @@
-<h1 class="text-center">Recent Posts</h1>
-<div class="card" style="width: 40rem; margin: auto; margin-bottom: 2%;" *ngFor="let item of arrPost" >
-
-  <div class="card-header">
-    <div class="row">
-      <div class="col-lg-11 float-left">
-        <h1> {{item.title}} </h1>
-      </div>
-
-      <div class="col-lg-1 float-right">
-        <button class="" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <div *ngFor="let x of arrTags">
-            <button mat-menu-item (click)="addTagToPost(x.tag_id,item.post_id)">
-              <mat-icon >local_offer</mat-icon>
-              <span >{{x.name | titlecase}}</span>
-            </button>
-          </div>
-        </mat-menu>
-      </div>
-    </div>
-  </div>
-  <img class="card-img-top cursor" src="{{item.image_url}}" alt="Card image cap" (click)="redirectToComment(item.post_id)">
-  <div class="card-body cursor" (click)="redirectToComment(item.post_id)">
-    <h1 class="card-title" style="text-align: center;" >{{item.title}}</h1>
-
-    <p class="card-text">{{item.content}}</p>
-  </div>
-  <div class="card-body">
-    <button class="btn btn-primary" style="margin-right: 1%;" (click)="likePost(item.post_id)"><mat-icon>thumb_up</mat-icon> {{item.likes}}</button>
-    <button class="btn btn-success disabled" style="margin-right: 1%;"><mat-icon>remove_red_eye</mat-icon>{{item.views}}</button>
-    <button class="btn btn-warning" (click) = "addFav(item.post_id)" style="margin-right: 1%;"><mat-icon>star</mat-icon></button>
-  </div>
+<div style="text-align: center;" *ngIf = "!showPosts">
+  <img src="https://cdn.pixabay.com/photo/2015/03/25/13/04/page-not-found-688965_960_720.png" alt="" >
 </div>
-<br><br><br>
-
-
-
-
-<!-- <div class="card m-5" *ngFor="let item of arrPost">
-  <div class="card-header text-center text-uppercase fs-4 fw-bold">
-    <img style="width: 60%; " src="{{item.image_url}}" alt=""> <br>
-    <button type="button" class="btn btn-light" (click)="redirectToComment()"><h2>{{item.title}}</h2></button>
-    <button class="fixedbutton" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <div *ngFor="let x of arrTags">
-        <button mat-menu-item (click)="addTagToPost(x.tag_id,item.post_id)">
-          <mat-icon >local_offer</mat-icon>
-          <span >{{x.name | titlecase}}</span>
-        </button>
+<div *ngIf = "showPosts">
+  <h1 class="text-center">Recent Posts</h1>
+  <div class="card" style="width: 40rem; margin: auto; margin-bottom: 2%;" *ngFor="let item of arrPost" >
+  
+    <div class="card-header">
+      <div class="row">
+        <div class="col-lg-11 float-left">
+          <h1> {{item.title}} </h1>
+        </div>
+        <div class="col-lg-1 float-right">
+          <button class="" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <div *ngFor="let x of arrTags">
+              <button mat-menu-item (click)="addTagToPost(x.tag_id,item.post_id)">
+                <mat-icon >local_offer</mat-icon>
+                <span >{{x.name | titlecase}}</span>
+              </button>
+            </div>
+          </mat-menu>
+        </div>
       </div>
-    </mat-menu>
-  </div>
-  <div class="card-body">
-    <p class="card-title text-end fs-5">Channel: {{item.channel_id}}</p>
-    <p class="card-text fs-5">{{item.content}}</p>
-    <div class="col text-end">
-      <button type="button" class="btn btn-link" (click)="redirectToComment()">View Comments</button>
-      <button class="btn btn-primary" (click)="likePost(item.post_id)"><i class="far fa-thumbs-up"></i> {{item.likes}}</button>
+    </div>
+    <img class="card-img-top cursor" src="{{item.image_url}}" alt="Card image cap" (click)="redirectToComment(item.post_id)">
+    <div class="card-body cursor" (click)="redirectToComment(item.post_id)">
+      <h1 class="card-title" style="text-align: center;" >{{item.title}}</h1>
+  
+      <p class="card-text">{{item.content}}</p>
+    </div>
+    <div class="card-body">
+      <button class="btn btn-primary" style="margin-right: 1%;" (click)="likePost(item.post_id)"><mat-icon>thumb_up</mat-icon> {{item.likes}}</button>
+      <button class="btn btn-success disabled" style="margin-right: 1%;"><mat-icon>remove_red_eye</mat-icon>{{item.views}}</button>
+      <button class="btn btn-warning" (click) = "addFav(item.post_id)" style="margin-right: 1%;"><mat-icon>star</mat-icon></button>
     </div>
   </div>
-  <br>
-</div> -->
+  <br><br><br>
+</div>

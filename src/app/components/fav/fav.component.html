@@ -11,7 +11,6 @@
 			<mat-list-item class="parent" (click)="home()">
 				<span class="full-width" *ngIf="isExpanded || isShowing" >Home</span>
 				<mat-icon mat-list-icon>home</mat-icon>
-				<!-- <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon> -->
 			</mat-list-item>
 			<mat-list-item class="parent" (click)="profile()">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Profile</span>
@@ -41,24 +40,27 @@
 			</div>
 		</mat-nav-list>
 	</mat-sidenav>
-	<div class="example-sidenav-content">
-		<h1 style="text-align: center" class="m-5">FAVORITES</h1>
+	<h1 style="text-align: center" class="m-5">FAVORITES</h1>
+	<div *ngIf = "!showFavs" style="text-align: center">
+		<h2>No posts in favorites</h2>
+	</div>
+	<div class="example-sidenav-content" *ngIf = "showFavs">
 		<div class="container text-center text-content-center" style="align-content: center;">
 			<div class="main-body">
 				<div class="row gutters-sm">
 					<div class="col-3"></div>
 					<div class="col-md-6 mb-3">
 						<div class="card">
-              <div class="card" style="width: 40rem; margin: auto;" *ngFor="let item of arrFav">
-                <img src="{{item.image_url}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h1 class="card-title" style="text-align: center;">{{item.title}}</h1>
-                </div>
-                <div class="card-body" style="text-align: center;">
-                  <button type="button" class="btn btn-danger" style="margin-right: 5px;" (click)="removePost(item.favorite_id)">Remove Post From Tag</button>
-                  <button type="button" class="btn btn-primary" (click)="viewComplete(item.post_id)">View Complete Post</button>
-                </div>
-              </div>
+							<div class="card" style="width: 40rem; margin: auto;" *ngFor="let item of arrFav">
+								<img src="{{item.image_url}}" class="card-img-top" alt="...">
+								<div class="card-body">
+									<h1 class="card-title" style="text-align: center;">{{item.title}}</h1>
+								</div>
+								<div class="card-body" style="text-align: center;">
+									<button type="button" class="btn btn-danger" style="margin-right: 5px;" (click)="removePost(item.favorite_id)">Remove Post From Tag</button>
+									<button type="button" class="btn btn-primary" (click)="viewComplete(item.post_id)">View Complete Post</button>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="col-3 bajarFondo"></div>

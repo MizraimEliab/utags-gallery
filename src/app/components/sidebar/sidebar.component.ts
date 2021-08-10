@@ -69,7 +69,6 @@ export class SidebarComponent implements OnInit {
 
   loggedIn(){
     this.logged = this.generalService.loggedIn()
-    console.log("Logged: " + this.logged)
   }
   logOut(){
     this.generalService.logout();
@@ -88,7 +87,13 @@ export class SidebarComponent implements OnInit {
       .subscribe(res =>{
         this.arrUser = res
         this.usertype = this.arrUser[0].usertype
+      },
+      err=>{
+        console.log(err)
       });
+    },
+    err=>{
+      console.log(err)
     });
   }
 
@@ -105,9 +110,7 @@ export class SidebarComponent implements OnInit {
       this.generalService.addTag(this.color)
       .subscribe(
         res=>{
-          console.log(res);
           let data = JSON.stringify(res);
-          console.log("Data Tag" + data);
           Swal.fire({
             icon: 'success',
             title: 'Your tag has been saved!',
@@ -124,7 +127,6 @@ export class SidebarComponent implements OnInit {
   }
 
   getAllTags(){
-    // console.log(this.userId)
     this.generalService.getTagsUser(this.userId)
       .subscribe(
         res=>{

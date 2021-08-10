@@ -46,44 +46,34 @@ export class CommentsComponent implements OnInit {
   }
 
   catchID(){
-    // this.route.params.subscribe((params: Params) => this.myParam = params['id']);
     this.ID = this.route.snapshot.params.id
-    console.log("...................");
-    console.log(this.ID)
   }
 
   getComments(){
-    // console.log(this.ID)
     this.generalService.getPostByID(this.ID)
     .subscribe(res=>{
       const json = JSON.stringify(res)
       const datajson = JSON.parse(json);
       this.arrPost = datajson.data
-      // this.arrPost = res.data
-      console.log(this.arrPost)
       this.generalService.getCommetsByPost(this.ID)
       .subscribe(res=>{
-        console.log('*************')
         const json = JSON.stringify(res)
         const datajson = JSON.parse(json);
         this.arrComments = datajson
-        console.log(this.arrComments)
+      },err=>{
+        console.log(err)
       })
+    },err=>{
+      console.log(err)
     })
-
-    // this.generalService.getCommetsByPost(this.generalService.post_id)
-    // .subscribe(res=>{
-    //   console.log(res)
-    //   this.arrComments = res;
-    // })
   }
+
   redirectToTag(id){
     this.router.navigate(['/tags/',id]);
   }
  
 
   getAllTags(){
-    // console.log(this.userId)
     this.generalService.getTagsUser(this.userId)
       .subscribe(
         res=>{
@@ -101,7 +91,6 @@ export class CommentsComponent implements OnInit {
       tag_id: tag_id,
       post_id : post_id
     }
-    console.log(this.body);
 
     this.generalService.addTagToPost(this.body)
       .subscribe(
@@ -114,11 +103,6 @@ export class CommentsComponent implements OnInit {
         },
         err=>{
           console.log(err)
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Error!'
-          })
         }
       )
   }
@@ -142,6 +126,13 @@ export class CommentsComponent implements OnInit {
         console.log(res)
         this.getComments()
         this.comment = ""
+        Swal.fire({
+          icon: 'success',
+          title: 'Comment added successfully!'
+        })
+      },
+      err=>{
+        console.log(err)
       })
     }
 
@@ -179,7 +170,6 @@ export class CommentsComponent implements OnInit {
 
   loggedIn(){
     this.logged = this.generalService.loggedIn()
-    console.log("Logged: " + this.logged)
   }
   logOut(){
     this.generalService.logout();
@@ -194,7 +184,13 @@ export class CommentsComponent implements OnInit {
       .subscribe(res =>{
         this.arrUser = res
         this.usertype = this.arrUser[0].usertype
+      },
+      err=>{
+        console.log(err)
       });
+    },
+    err=>{
+      console.log(err)
     });
   }
 
@@ -228,5 +224,4 @@ export class CommentsComponent implements OnInit {
       )
    }
   }
-
 }

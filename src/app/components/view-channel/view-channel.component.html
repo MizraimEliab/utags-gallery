@@ -12,7 +12,6 @@
 			<mat-list-item class="parent">
 				<span class="full-width" *ngIf="isExpanded || isShowing" (click)="home()">Home</span>
 				<mat-icon mat-list-icon>home</mat-icon>
-				<!-- <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon> -->
 			</mat-list-item>
 			<mat-list-item class="parent" (click)="profile()">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Profile</span>
@@ -43,19 +42,15 @@
 		</mat-nav-list>
 	</mat-sidenav>
 	<div class="example-sidenav-content">
-		<button mat-fab color="primary" class="text-center m-5"> 
-            <mat-icon mat-list-item data-bs-toggle="modal" data-bs-target="#exampleModal" mat-list-icon>add</mat-icon>
-        </button>
+        <div *ngIf = "showAddPost">
+            <button mat-fab color="primary" class="text-center m-5"> 
+                <mat-icon mat-list-item data-bs-toggle="modal" data-bs-target="#exampleModal" mat-list-icon>add</mat-icon>
+            </button>
+        </div>
         
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalChannel" *ngIf="!channel">Create Channel</button>
+        <button type="button" class="btn btn-success m-5" data-bs-toggle="modal" data-bs-target="#exampleModalChannel" *ngIf="!channel">Create Channel</button>
         
-        
-        
-        
-       
-        
-        
-        <!-- name, description, cantidad de publicaciones -->
+
         
         <h2 class="text-center mt-5">Channel Name: {{nameChannel}}</h2>
         <h2 class="text-center mt-5"> Description: {{descriptionChanne}}</h2>
@@ -64,29 +59,21 @@
         <h1 class="text-center mt-5">My Posts</h1>
         
         <!-- All posts -->
+
+        <div *ngIf = "!showPosts" style="text-align: center;">
+            <h2>There are no posts in the channel</h2>
+        </div>
         
-        
-        <div class="card" style="width: 40rem; margin: auto; margin-bottom: 2%;" *ngFor="let item of arrPosts" >
-            <img class="card-img-top" src="{{item.image_url}}" alt="Card image cap">
-            <div class="card-body">
-              <a ><h1 class="card-title" style="text-align: center;" >{{item.title}}</h1></a>
-              <p class="card-text">{{item.content}}</p>
+        <div *ngIf = "showPosts">
+            <div class="card" style="width: 40rem; margin: auto; margin-bottom: 2%;" *ngFor="let item of arrPosts" >
+                <img class="card-img-top" src="{{item.image_url}}" alt="Card image cap">
+                <div class="card-body">
+                    <a ><h1 class="card-title" style="text-align: center;" >{{item.title}}</h1></a>
+                    <p class="card-text">{{item.content}}</p>
+                </div>
             </div>
-          </div>
-        
-        
-        <!-- <div class="card m-5" *ngFor="let item of arrPost">
-            <div class="card-header text-center text-uppercase fs-4 fw-bold">
-              {{item.title}}
-            </div>
-            <div class="card-body">
-              <p class="card-title text-end fs-5">Channel: {{item.channel_id}}</p>
-              <p class="card-text fs-5">{{item.content}}</p>
-              <div class="col text-end">
-                <button class="btn btn-success">Like</button>
-              </div>
-            </div>
-        </div> -->      
+        </div>
+            
 	</div> 
     <div class="bajarFondo"></div>
 </mat-sidenav-container>
@@ -105,37 +92,25 @@
                         <label for="exampleInputEmail1" class="form-label">Post title</label>
                         <input [(ngModel)]="post.title"  type="text" class="form-control" name="title" placeholder="Post title" required>
                     </div>
-          <div class="form-group form-outline mb-4">
-            <label for="exampleInputEmail1" class="form-label">Post image</label>
-            <div class="input-group mb-3">
-              <input style="width: 80%;" [(ngModel)]="post.image_url"  type="text" class="form-control" name="image_url" placeholder="Post image (opcional)" required>
-              <div class="input-group-append">
-                <a  class="btn btn-primary" (click)="getImagesPixabay(post.image_url)"><mat-icon class="mt-1">search</mat-icon></a>
-              </div>
-            </div>
-          </div>
-
-          <!-- aqui ponemos la images -->
-          <div class="row">
-            <div class="column" *ngFor="let x of ListImages">
-              <a (click)="getURL(x)"><img src="{{x}}" alt="" style="width: 100%;"></a>
-            </div>
-          </div>
-
+                    <div class="form-group form-outline mb-4">
+                        <label for="exampleInputEmail1" class="form-label">Post image</label>
+                        <div class="input-group mb-3">
+                        <input style="width: 80%;" [(ngModel)]="post.image_url"  type="text" class="form-control" name="image_url" placeholder="Post image (opcional)" required>
+                        <div class="input-group-append">
+                            <a  class="btn btn-primary" (click)="getImagesPixabay(post.image_url)"><mat-icon class="mt-1">search</mat-icon></a>
+                        </div>
+                        </div>
+                    </div>
                     <!-- aqui ponemos la images -->
                     <div class="row">
                         <div class="column" *ngFor="let x of ListImages">
                             <a (click)="getURL(x)"><img src="{{x}}" alt="" style="width: 100%;"></a>
                         </div>
                     </div>
-
-
                     <div class="form-group form-outline mb-4">
                         <label for="exampleInputEmail1" class="form-label">Post content</label>
                         <textarea [(ngModel)]="post.content"  type="text" class="form-control" name="content" placeholder="Post content" required></textarea>
                     </div>
-
-
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" >Cancel</button>
                         <div class="d-grid gap-2">
@@ -172,7 +147,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" >Cancel</button>
                         <div class="d-grid gap-2">
-                            <button class="btn btn-primary" type="submit">Create new channel</button>
+                            <button class="btn btn-primary" type="submit" >Create new channel</button>
                         </div>
                     </div>
                 </form>

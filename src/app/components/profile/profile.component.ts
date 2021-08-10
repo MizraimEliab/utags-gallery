@@ -15,7 +15,6 @@ export class ProfileComponent implements OnInit {
   userId : number
   userChannel: boolean
   arrUser: any[]
-  // route: any
   isExpanded = true;
   showSubmenu: boolean = false;
   isShowing = false;
@@ -37,22 +36,16 @@ export class ProfileComponent implements OnInit {
     this.getUser();
     this.getUserType();
     this.loggedIn();
-    // this.route = this.router.url
   }
 
   getUser(){
     this.generalService.getProfile()
     .subscribe(res =>{
-      console.log(res);
       this.userId = res['user_id'];
       this.generalService.getUser(this.userId)
       .subscribe(res =>{
         this.arrUser = res
-        this.usertype = this.generalService.user_type 
-        this.generalService.getChannel(this.userId)
-        .subscribe(res=>{
-          console.log("ChannelID: " + JSON.stringify(res))
-        })  
+        this.usertype = this.generalService.user_type  
       });
     });
   }
@@ -104,7 +97,6 @@ export class ProfileComponent implements OnInit {
 
   loggedIn(){
     this.logged = this.generalService.loggedIn()
-    console.log("Logged: " + this.logged)
   }
   logOut(){
     this.generalService.logout();
@@ -123,9 +115,7 @@ export class ProfileComponent implements OnInit {
       this.generalService.addTag(this.color)
       .subscribe(
         res=>{
-          console.log(res);
           let data = JSON.stringify(res);
-          console.log("Data Tag" + data);
           Swal.fire({
             icon: 'success',
             title: 'Your tag has been saved!',
@@ -142,7 +132,6 @@ export class ProfileComponent implements OnInit {
   }
 
   getAllTags(){
-    // console.log(this.userId)
     this.generalService.getTagsUser(this.userId)
       .subscribe(
         res=>{

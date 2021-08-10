@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
   }
   
   signIn(){
-    // console.log(this.user)    
     if(this.user.email == '' || this.user.password == ''){
       Swal.fire({
         icon: 'error',
@@ -32,7 +31,7 @@ export class LoginComponent implements OnInit {
       this.generalService.signIn(this.user)
       .subscribe(
         res=>{
-          if(res.Message == 'Something is wrong'){
+          if(res.Message == 'Something is wrong' || res.status == 'Fail User not found'){
             Swal.fire({
               icon: 'error',
               title: 'Oops...',

@@ -15,10 +15,12 @@ export class ViewChannelComponent implements OnInit {
   channel: boolean
   arrPosts: any[]
   channelID: any
+  showAddPost: boolean
 
   nameChannel: any
   descriptionChanne: any
   postChannel: any
+  showPosts: boolean
 
   post= {
     channel_id: 0,
@@ -43,7 +45,7 @@ export class ViewChannelComponent implements OnInit {
   arrTags: any[]
   logged: boolean
   route: any
-  item = '#FF0000'
+
 
   color= {
     user_id: 0,
@@ -60,33 +62,31 @@ export class ViewChannelComponent implements OnInit {
   }
 
   getURL(url:string){
-    console.log(url);
     this.post.image_url = url;
-    console.log(this.post);
   }
 
-
-
-
-
   getImagesPixabay(word:string){
-
     this.generalService.getImagesPixabay(word)
     .subscribe(res=>{
-      console.log('*******************');
       const json = JSON.stringify(res)
       const datajson = JSON.parse(json);
-      //console.log(datajson.images);
       this.ListImages = datajson.images;
-      console.log(this.ListImages);
-
+      if(this.ListImages.length <= 0){
+        Swal.fire({
+          type: 'warning',
+          icon: 'warning',
+          title: 'Not Image Found',
+          text: 'No images found on Pixabay'
+        })
+      }
+    },
+    err=>{
+      console.log(err)
     })
   }
 
   newPost(){
-    console.log("****************************************************")
     this.post.channel_id = this.generalService.user_channel
-    console.log(this.post)
     if (!this.post.image_url) {
       this.post.image_url = "https://www.smartdatajob.com/images/joomlart/demo/default.jpg";
     }
@@ -101,7 +101,11 @@ export class ViewChannelComponent implements OnInit {
       this.generalService.newPost(this.post)
       .subscribe(
         res=>{
-          console.log(res)
+          Swal.fire({
+            icon: 'success',
+            title: 'Your post has been posted!',
+            showConfirmButton: true,
+          })
           this.router.navigate(['home']).then(() => {
             window.location.reload();
           });
@@ -111,20 +115,16 @@ export class ViewChannelComponent implements OnInit {
         }
       )
     }
-
-
   }
 
   getChannel(){
     this.generalService.getUserChannel(this.generalService.user_id)
     .subscribe(res=>{
-      console.log(res)
       if(res.Message=="No channels found"){
         this.channel = false;
-        console.log("No hay")
+        this.showAddPost = false
       }else{
-        console.log("*************************")
-        console.log(res)
+        this.showAddPost = true
         this.channel = true;
         this.generalService.user_channel = res[0].channel_id
         this.postChannel = res[0].postquantity
@@ -132,26 +132,54 @@ export class ViewChannelComponent implements OnInit {
         this.nameChannel = res[0].name
         this.getPostChannel(res[0].channel_id)
       }
+    },
+    err=>{
+      console.log(err)
     })
   }
 
   newChannel(){
-    this.generalService.newChannel(this.addChannel)
-    .subscribe(res=>{
-      console.log(res)
-    })
+    if(this.addChannel.description == '' || this.addChannel.name == ''){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Pls fill all the fields!'
+      })
+    }else{
+      this.generalService.newChannel(this.addChannel)
+      .subscribe(res=>{
+        Swal.fire({
+          icon: 'success',
+          title: 'Channel created successfully!',
+          showConfirmButton: true,
+        })
+        this.router.navigate(['home']).then(() => {
+          window.location.reload();
+        });
+      },
+      err=>{
+        console.log(err)
+      })
+    }
   }
 
   getPostChannel(id){
     this.generalService.getPostChannel(id)
     .subscribe(res=>{
-      console.log("*****  Ayuda ******")
       let data = JSON.stringify(res);
-      let dataJson = JSON.parse(data);  
-      this.arrPosts = dataJson
-      console.log(this.arrPosts)
+      let dataJson = JSON.parse(data); 
+      if(dataJson.Message){
+        this.showPosts = false
+      }else{
+        this.showPosts = true
+        this.arrPosts = dataJson
+      } 
+    },
+    err=>{
+      console.log(err)
     })
   }
+
   mouseenter() {
     if (!this.isExpanded) {
       this.isShowing = true;
@@ -182,7 +210,6 @@ export class ViewChannelComponent implements OnInit {
 
   loggedIn(){
     this.logged = this.generalService.loggedIn()
-    console.log("Logged: " + this.logged)
   }
   logOut(){
     this.generalService.logout();
@@ -200,7 +227,13 @@ export class ViewChannelComponent implements OnInit {
       .subscribe(res =>{
         this.arrUser = res
         this.usertype = this.arrUser[0].usertype
+      },
+      err=>{
+        console.log(err)
       });
+    },
+    err=>{
+      console.log(err)
     });
   }
 
@@ -217,9 +250,7 @@ export class ViewChannelComponent implements OnInit {
       this.generalService.addTag(this.color)
       .subscribe(
         res=>{
-          console.log(res);
           let data = JSON.stringify(res);
-          console.log("Data Tag" + data);
           Swal.fire({
             icon: 'success',
             title: 'Your tag has been saved!',
@@ -236,7 +267,6 @@ export class ViewChannelComponent implements OnInit {
   }
 
   getAllTags(){
-    // console.log(this.userId)
     this.generalService.getTagsUser(this.userId)
       .subscribe(
         res=>{

@@ -23,6 +23,7 @@ export class FavComponent implements OnInit {
   logged: boolean
   route: any
   item = '#FF0000'
+  showFavs: boolean
 
   color= {
     user_id: 0,
@@ -40,20 +41,34 @@ export class FavComponent implements OnInit {
 
 
   getPosts(){
-    // console.log(this.generalService.user_id)
     this.generalService.getFavPost(this.generalService.user_id)
     .subscribe(res=>{
-      console.log("*************")
-      this.arrFav = res
-      console.log(res)
+      let data = JSON.stringify(res);
+      let dataJson = JSON.parse(data); 
+      if(dataJson[0]==undefined){
+        this.showFavs = false
+      }else{
+        this.showFavs = true
+        this.arrFav = res
+      }
+    },
+    err=>{
+      console.log(err)
     })
   }
 
   removePost(id){
     this.generalService.deleteFavPost(id)
     .subscribe(res=>{
-      console.log(res)
+      Swal.fire({
+        icon: 'success',
+        title: 'The post has been removed from favorites',
+        showConfirmButton: true,
+      })
       this.getPosts()
+    },
+    err=>{
+      console.log(err)
     })
   }
 
@@ -93,7 +108,6 @@ export class FavComponent implements OnInit {
 
   loggedIn(){
     this.logged = this.generalService.loggedIn()
-    console.log("Logged: " + this.logged)
   }
   logOut(){
     this.generalService.logout();
@@ -108,7 +122,13 @@ export class FavComponent implements OnInit {
       .subscribe(res =>{
         this.arrUser = res
         this.usertype = this.arrUser[0].usertype
+      },
+      err=>{
+        console.log(err)
       });
+    },
+    err=>{
+      console.log(err)
     });
   }
 
@@ -125,9 +145,7 @@ export class FavComponent implements OnInit {
       this.generalService.addTag(this.color)
       .subscribe(
         res=>{
-          console.log(res);
           let data = JSON.stringify(res);
-          console.log("Data Tag" + data);
           Swal.fire({
             icon: 'success',
             title: 'Your tag has been saved',
@@ -144,15 +162,14 @@ export class FavComponent implements OnInit {
   }
 
   getAllTags(){
-    // console.log(this.userId)
     this.generalService.getTagsUser(this.userId)
-      .subscribe(
-        res=>{
-          this.arrTags = res
-        },
-        err=>{
-          console.log(err)
-        }
-      )
+    .subscribe(
+      res=>{
+        this.arrTags = res
+      },
+      err=>{
+        console.log(err)
+      }
+    )
   }
 }

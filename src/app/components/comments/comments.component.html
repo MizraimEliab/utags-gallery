@@ -12,7 +12,6 @@
 			<mat-list-item class="parent" (click)="home()">
 				<span class="full-width" *ngIf="isExpanded || isShowing" >Home</span>
 				<mat-icon mat-list-icon>home</mat-icon>
-				<!-- <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon> -->
 			</mat-list-item>
 			<mat-list-item class="parent" (click)="profile()">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Profile</span>
@@ -45,10 +44,6 @@
   <br><br>
 	<div class="example-sidenav-content">
       <div class="card" style="width: 40rem; margin: auto; margin-bottom: 2%;" *ngFor="let item of arrPost" >
-
-
-
-
 		<div class="card-header">
 			<div class="row">
 			  <div class="col-lg-11 float-left">
@@ -70,10 +65,6 @@
 			  </div>
 			</div>
 		  </div>
-
-
-
-
         <img class="card-img-top" src="{{item.image_url}}" alt="Card image cap">
         <div class="card-body">
           <p class="card-text">{{item.content}}</p>
@@ -91,5 +82,4 @@
 	</div> 
   <div class="bajarFondo"></div>
 </mat-sidenav-container>
-
 <br>
