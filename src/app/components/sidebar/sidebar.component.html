@@ -24,8 +24,8 @@
 				</mat-list-item>
 			</div>
 			
-			<mat-list-item class="parent">
-				<span class="full-width" *ngIf="isExpanded || isShowing" (click)="fav()">Favorites</span>
+			<mat-list-item class="parent" (click)="fav()">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Favorites</span>
 				<mat-icon mat-list-icon>star</mat-icon>
 			</mat-list-item>
 			<mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
@@ -44,6 +44,7 @@
 	<div class="example-sidenav-content">
 		<app-posts *ngIf="route == '/home'"></app-posts>
 		<app-profile *ngIf="route == '/profile'"></app-profile>
+		<app-fav *ngIf="route == '/favorites'"></app-fav>
 		<!-- <router-outlet></router-outlet> -->
 	</div> 
 </mat-sidenav-container>

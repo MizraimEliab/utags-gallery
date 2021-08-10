@@ -11,3 +11,7 @@
     clear: both;
     display: table;
   } 
+  .fixedbutton {
+    position: fixed;
+    right: 0px; 
+  }

@@ -1,28 +1,77 @@
-<div class="card" style="width: 40rem; margin: auto; margin-bottom: 2%;" *ngFor="let item of arrPost" >
-    <img class="card-img-top" src="{{item.image_url}}" alt="Card image cap">
-    <div class="card-body">
-      <a  (click)="redirectToComment(item.post_id)"><h1 class="card-title" style="text-align: center;" >{{item.title}}</h1></a>
-      <button class="fixedbutton" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <div *ngFor="let x of arrTags">
-          <button mat-menu-item (click)="addTagToPost(x.tag_id,item.post_id)">
-            <mat-icon >local_offer</mat-icon>
-            <span >{{x.name | titlecase}}</span>
+<mat-toolbar color="primary" class="example-toolbar">
+	<button mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button>
+	<h1 class="example-app-name">Gallery</h1>
+	<button mat-button (click)="logOut()" class="fixedbutton">
+		<mat-icon mat-list-icon>exit_to_app</mat-icon>
+	</button>
+</mat-toolbar>
+
+<mat-sidenav-container class="example-container">
+	<mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
+		<mat-nav-list>
+			<mat-list-item class="parent">
+				<span class="full-width" *ngIf="isExpanded || isShowing" (click)="home()">Home</span>
+				<mat-icon mat-list-icon>home</mat-icon>
+				<!-- <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon> -->
+			</mat-list-item>
+			<mat-list-item class="parent" (click)="profile()">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Profile</span>
+				<mat-icon mat-list-icon>person_outline</mat-icon>
+			</mat-list-item>
+			<div *ngIf="usertype==1">
+				<mat-list-item class="parent"   (click)="channel()">
+					<span class="full-width" *ngIf="isExpanded || isShowing">My Channel</span>
+					<mat-icon mat-list-icon>tv</mat-icon>
+				</mat-list-item>
+			</div>
+			
+			<mat-list-item class="parent" (click)="fav()">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Favorites</span>
+				<mat-icon mat-list-icon>star</mat-icon>
+			</mat-list-item>
+			<mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
+				<span class="full-width" *ngIf="isExpanded || isShowing">Tags</span>
+				<mat-icon mat-list-icon>local_offer</mat-icon>
+				<mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon>
+			</mat-list-item>
+			<div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+				<a mat-list-item data-bs-toggle="modal" data-bs-target="#exampleModal">Add Tag<mat-icon mat-list-icon>add</mat-icon></a>
+				<div *ngFor="let item of arrTags">
+					<a href="/tags/{{item.tag_id}}" mat-list-item>{{item.name | titlecase}}</a>
+				</div>
+			</div>
+		</mat-nav-list>
+	</mat-sidenav>
+  <br><br>
+	<div class="example-sidenav-content">
+      <div class="card" style="width: 40rem; margin: auto; margin-bottom: 2%;" *ngFor="let item of arrPost" >
+        <img class="card-img-top" src="{{item.image_url}}" alt="Card image cap">
+        <div class="card-body">
+          <a  (click)="redirectToComment(item.post_id)"><h1 class="card-title" style="text-align: center;" >{{item.title}}</h1></a>
+          <button class="fixedbutton" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
           </button>
+          <mat-menu #menu="matMenu">
+            <div *ngFor="let x of arrTags">
+              <button mat-menu-item (click)="addTagToPost(x.tag_id,item.post_id)">
+                <mat-icon >local_offer</mat-icon>
+                <span >{{x.name | titlecase}}</span>
+              </button>
+            </div>
+          </mat-menu>
+          <p class="card-text">{{item.content}}</p>
         </div>
-      </mat-menu>
-      <p class="card-text">{{item.content}}</p>
+        <div class="card-body">
+          <input type="text" [(ngModel)]="comment" name="comment"  class="form-control" placeholder="Type your comment"> <br>
+          <button class="btn btn-primary" style="margin-right: 1%;" (click)="Comment(item.post_id)"><mat-icon style="font-size:15px;">message</mat-icon>Comment</button>
+        </div>
+        <div class="card-footer">
+            <ul class="list-group" *ngFor="let item of arrComments">
+                <li class="list-group-item" >{{item.comment}}</li>
+            </ul>
+        </div>
     </div>
-    <div class="card-body">
-      <input type="text" [(ngModel)]="comment" name="comment"  class="form-control" placeholder="Type your comment"> <br>
-      <button class="btn btn-primary" style="margin-right: 1%;" (click)="Comment(item.post_id)"><mat-icon style="font-size:15px;">message</mat-icon>Comment</button>
-    </div>
-    <div class="card-footer">
-        <ul class="list-group" *ngFor="let item of arrComments">
-            <li class="list-group-item" >{{item.comment}}</li>
-        </ul>
-    </div>
-</div>
+	</div> 
+</mat-sidenav-container>
+
 <br>
