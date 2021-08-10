@@ -77,21 +77,24 @@ export class CommentsComponent implements OnInit {
     //   this.arrComments = res;
     // })
   }
+  redirectToTag(id){
+    this.router.navigate(['/tags/',id]);
+  }
+ 
 
   getAllTags(){
     // console.log(this.userId)
-    this.generalService.getTagsUser(this.generalService.user_id)
+    this.generalService.getTagsUser(this.userId)
       .subscribe(
         res=>{
-          const json = JSON.stringify(res)
-          const datajson = JSON.parse(json);
-          this.arrTags = datajson
+          this.arrTags = res
         },
         err=>{
           console.log(err)
         }
       )
   }
+  
 
   addTagToPost(tag_id, post_id){
     this.body = {

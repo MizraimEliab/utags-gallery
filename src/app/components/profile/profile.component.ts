@@ -61,6 +61,7 @@ export class ProfileComponent implements OnInit {
     this.generalService.getProfile()
     .subscribe(res =>{
       this.userId = res['user_id'];
+      this.getAllTags();
       this.generalService.getUser(this.userId)
       .subscribe(res =>{
         this.arrUser = res
@@ -79,6 +80,10 @@ export class ProfileComponent implements OnInit {
     if (!this.isExpanded) {
       this.isShowing = false;
     }
+  }
+
+  redirectToTag(id){
+    this.router.navigate(['/tags/',id]);
   }
 
   channel(){

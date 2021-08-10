@@ -72,7 +72,9 @@ export class FavComponent implements OnInit {
       this.isShowing = false;
     }
   }
-
+  redirectToTag(id){
+    this.router.navigate(['/tags/',id]);
+  }
   channel(){
     this.router.navigate(['/viewChannel']);
   }
