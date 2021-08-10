@@ -39,7 +39,8 @@
 		</mat-nav-list>
 	</mat-sidenav>
 	<div class="example-sidenav-content">
-		<app-posts></app-posts>
+		<app-posts *ngIf="route == '/home'"></app-posts>
+		<app-profile *ngIf="route == '/profile'"></app-profile>
 		<!-- <router-outlet></router-outlet> -->
 	</div> 
 </mat-sidenav-container>

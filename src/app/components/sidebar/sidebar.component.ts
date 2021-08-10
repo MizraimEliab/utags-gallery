@@ -20,6 +20,7 @@ export class SidebarComponent implements OnInit {
   arrTags: any[]
   usertype : number
   logged: boolean
+  route: any
   item = '#FF0000'
 
   color= {
@@ -35,6 +36,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.getUserType();
     this.loggedIn();
+    this.route = this.router.url
   }
 
   mouseenter() {
