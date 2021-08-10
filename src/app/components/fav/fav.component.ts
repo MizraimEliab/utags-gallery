@@ -130,7 +130,7 @@ export class FavComponent implements OnInit {
           console.log("Data Tag" + data);
           Swal.fire({
             icon: 'success',
-            title: 'Your tag has been saved!',
+            title: 'Your tag has been saved',
             showConfirmButton: true,
           }).then((result) => {
             window.location.reload();

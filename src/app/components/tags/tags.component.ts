@@ -19,6 +19,7 @@ export class TagsComponent implements OnInit {
   userId : number
   arrUser: any[]
   arrTags: any[]
+  arrPosts: any[]
   usertype : number
   logged: boolean
   item = '#FF0000'
@@ -35,9 +36,9 @@ export class TagsComponent implements OnInit {
   constructor(private generalService : GeneralService, private router: Router ,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.getTagID()
     this.getUserType();
     this.getAllTags()
-    this.getTagID()
     this.getPosts()
     this.getTagData()
     this.loggedIn();
@@ -48,11 +49,12 @@ export class TagsComponent implements OnInit {
   }
 
   getTagData(){
+    console.log("***********TagID " + this.tagID)
     this.generalService.getTag(this.tagID)
     .subscribe(res=>{
       console.log("///////////////")
       this.tagName = res[0].name
-      console.log(this.tagName)
+      console.log("------------ " + this.tagName)
     })
   }
 
@@ -64,17 +66,17 @@ export class TagsComponent implements OnInit {
     this.generalService.getTagsPost(this.tagID)
     .subscribe(res=>{
       console.log("*************")
-      this.arrTags = res
+      this.arrPosts = res
       console.log(res)
-      // if(res.code == "404"){
-      //   Swal.fire({
-      //     icon: 'warning',
-      //     title: 'Oops...',
-      //     text: 'You dont have any post tagged!'
-      //   }).then((result) => {
-      //     window.location.href = "/home";
-      //   })
-      // }
+      if(res.code == "404"){
+        Swal.fire({
+          icon: 'warning',
+          title: 'Oops...',
+          text: 'You dont have any post tagged!'
+        }).then((result) => {
+          window.location.href = "/home";
+        })
+      }
     })
   }
 
@@ -119,7 +121,13 @@ export class TagsComponent implements OnInit {
   }
 
   redirectToTag(id){
-    this.router.navigate(['/tags/',id]);
+    console.log("id" + id)
+    this.router.navigate(['/tags/',id])
+    this.getTagID()
+    this.getTagData()
+    this.getPosts()
+    console.log('tagID ' + this.tagID)   
+    console.log('tagName' + this.tagName)
   }
 
   getAllTags(){

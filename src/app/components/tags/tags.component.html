@@ -12,7 +12,7 @@
 			<mat-list-item class="parent">
 				<span class="full-width" *ngIf="isExpanded || isShowing" (click)="home()">Home</span>
 				<mat-icon mat-list-icon>home</mat-icon>
-				<!-- <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more</mat-icon> -->
+
 			</mat-list-item>
 			<mat-list-item class="parent" (click)="profile()">
 				<span class="full-width" *ngIf="isExpanded || isShowing">Profile</span>
@@ -47,7 +47,7 @@
 			<div class="main-body">				
           <h1 style="text-align: center" class="m-5">{{tagName | uppercase}}</h1>
         <br><br>
-        <div class="card" style="width: 40rem; margin: auto;" *ngFor="let item of arrTags">
+        <div class="card" style="width: 40rem; margin: auto;" *ngFor="let item of arrPosts">
             <img src="{{item.image_url}}" class="card-img-top" alt="...">
             <div class="card-body">
               <h1 class="card-title" style="text-align: center;">{{item.title}}</h1>
