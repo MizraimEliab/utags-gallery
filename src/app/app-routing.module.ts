@@ -10,6 +10,8 @@ import { PostsComponent } from './components/posts/posts.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { FavComponent } from './components/fav/fav.component';
+import { TagsComponent } from './components/tags/tags.component';
+
 
 const routes: Routes = [
 
@@ -54,6 +56,11 @@ const routes: Routes = [
   {
     path:'favorites',
     component:FavComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path:'tags/:id',
+    component:TagsComponent,
     canActivate: [AuthGuard]
   }
 ];
