@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="/home">Gallery</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,14 +15,21 @@
         </ul>
       </div>
     </div>
-  </nav>
+  </nav> -->
+<mat-toolbar color="primary" class="">
+  <h1 class="example-app-name">Gallery</h1>
+  <button mat-button class="fixedbutton">
+    <button type="button" mat-flat-button color="primary" routerLink="/signin">LogIn</button>
+    <button type="button" mat-flat-button color="primary" routerLink="/signup">SignUp</button>
+  </button>
+</mat-toolbar>
 
-<div class="row mt-5">
+<div class="mt-5">
     <div class="col-md-4 mx-auto">
         <div class="card">
-            <div class="card-header">
-                SignUp
-            </div>
+            <div class="card-header text-center">
+              <h2>SignUp</h2>
+          </div>
             <div class="card-body">
                 <form (submit)="signUp()">
                     <div class="form-group form-outline mb-4">

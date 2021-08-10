@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { GeneralService } from '../../service/general-service.service';
 import { Router } from '@angular/router'
 import Swal from 'sweetalert2/dist/sweetalert2.js'; 
@@ -9,7 +10,11 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-
+  @ViewChild('sidenav') sidenav: MatSidenav;
+  isExpanded = true;
+  showSubmenu: boolean = false;
+  isShowing = false;
+  showSubSubMenu: boolean = false;
   user = {
     name:'',
     lastname:'',
