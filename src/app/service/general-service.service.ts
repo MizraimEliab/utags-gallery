@@ -12,6 +12,9 @@ export class GeneralService {
   user_type : number
   user_name: string
   user_channel: any
+  channel_name: any
+  channel_description: any
+  post_count: any
   post_id: any
   mytrustedUrl;
 
@@ -103,6 +106,14 @@ export class GeneralService {
 
   deleteFavPost(fav_id){
     return this.http.put<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/favorites/'+`${fav_id}`,'')
+  }
+
+  getUserChannel(user_id){
+    return this.http.get<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/channels/channel/user/'+`${user_id}`)
+  }
+
+  getPostChannel(channel_id){
+    return this.http.get<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/channels/posts/'+`${channel_id}`)
   }
 
 }
