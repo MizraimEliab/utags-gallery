@@ -1,7 +1,7 @@
 <div class="card" style="width: 40rem; margin: auto; margin-bottom: 2%;" *ngFor="let item of arrPost" >
     <img class="card-img-top" src="{{item.image_url}}" alt="Card image cap">
     <div class="card-body">
-      <a (click)="redirectToComment(item.post_id)"><h1 class="card-title" style="text-align: center;" >{{item.title}}</h1></a>
+      <a  (click)="redirectToComment(item.post_id)"><h1 class="card-title" style="text-align: center;" >{{item.title}}</h1></a>
       <button class="fixedbutton" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>more_vert</mat-icon>
       </button>
