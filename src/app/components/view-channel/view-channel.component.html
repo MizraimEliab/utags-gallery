@@ -115,6 +115,12 @@
             </div>
           </div>
 
+          <!-- aqui ponemos la images -->
+          <div class="row">
+            <div class="column" *ngFor="let x of ListImages">
+              <a (click)="getURL(x)"><img src="{{x}}" alt="" style="width: 100%;"></a>
+            </div>
+          </div>
 
                     <!-- aqui ponemos la images -->
                     <div class="row">
