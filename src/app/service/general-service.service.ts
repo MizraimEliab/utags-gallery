@@ -116,4 +116,8 @@ export class GeneralService {
     return this.http.get<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/channels/posts/'+`${channel_id}`)
   }
 
+  getTag(tag_id){
+    return this.http.get<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/tags/'+`${tag_id}`)
+  }
+
 }

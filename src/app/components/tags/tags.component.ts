@@ -13,6 +13,7 @@ export class TagsComponent implements OnInit {
 
   arrTags: any[]
   tagID: any[]
+  tagName: any
 
   constructor(private generalService : GeneralService, private router: Router ,private route: ActivatedRoute) { }
 
@@ -21,12 +22,20 @@ export class TagsComponent implements OnInit {
     // this.getPosts();
     this.getTagID()
     this.getPosts()
+    this.getTagData()
   }
 
   getTagID(){
     this.tagID = this.route.snapshot.params.id
-    console.log("-----------")
-    console.log(this.tagID)
+  }
+
+  getTagData(){
+    this.generalService.getTag(this.tagID)
+    .subscribe(res=>{
+      console.log("///////////////")
+      this.tagName = res[0].name
+      console.log(this.tagName)
+    })
   }
 
 
