@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { GeneralService } from '../../service/general-service.service'
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+
 @Component({
   selector: 'app-view-channel',
   templateUrl: './view-channel.component.html',
@@ -26,8 +27,11 @@ export class ViewChannelComponent implements OnInit {
     console.log(url);
     this.post.image_url = url;
     console.log(this.post);
-
   }
+
+
+
+
 
   getImagesPixabay(word:string){
 
@@ -45,6 +49,9 @@ export class ViewChannelComponent implements OnInit {
 
   newPost(){
     console.log(this.post)
+    if (!this.post.image_url) {
+      this.post.image_url = "https://www.smartdatajob.com/images/joomlart/demo/default.jpg";
+    }
     if (!this.post.title || !this.post.content) {
       Swal.fire({
         type: 'warning',
@@ -57,7 +64,9 @@ export class ViewChannelComponent implements OnInit {
       .subscribe(
         res=>{
           console.log(res)
-          this.router.navigate(['home'])
+          this.router.navigate(['home']).then(() => {
+            window.location.reload();
+          });
         },
         err=>{
           console.log(err)

@@ -83,9 +83,14 @@ export class PostsComponent implements OnInit {
     this.generalService.postLiked(id)
     .subscribe(res=>{
       console.log(res)
-      this.getPosts()
+      const post = this.arrPost.filter((x) => {
+        if (x.post_id === id) {
+          x.likes = x.likes + 1;
+        };
+      })
     })
   }
+
 
   getAllTags(){
     // console.log(this.userId)

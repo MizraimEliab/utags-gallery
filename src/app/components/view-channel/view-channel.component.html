@@ -61,27 +61,24 @@
             </div>
           </div>
 
+          <!-- aqui ponemos la images -->
+          <div class="row">
+            <div class="column" *ngFor="let x of ListImages">
+              <a (click)="getURL(x)"><img src="{{x}}" alt="" style="width: 100%;"></a>
+            </div>
+          </div>
 
-                    <!-- aqui ponemos la images -->
-                    <div class="row">
-                        <div class="column" *ngFor="let x of ListImages">
-                            <a (click)="getURL(x)"><img src="{{x}}" alt="" style="width: 100%;"></a>
-                        </div>
-                    </div>
+          <div class="form-group form-outline mb-4">
+            <label for="exampleInputEmail1" class="form-label">Post content</label>
+            <textarea [(ngModel)]="post.content"  type="text" class="form-control" name="content" placeholder="Post content" required></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" >Cancel</button>
+            <div class="d-grid gap-2">
+              <button class="btn btn-primary" type="submit">Create new post</button>
+            </div>
+          </div>
 
-
-                    <div class="form-group form-outline mb-4">
-						<label for="exampleInputEmail1" class="form-label">Post content</label>
-						<textarea [(ngModel)]="post.content"  type="text" class="form-control" name="content" placeholder="Post content" required></textarea>
-					</div>
-
-
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-bs-dismiss="modal" >Cancel</button>
-						<div class="d-grid gap-2">
-                            <button class="btn btn-primary" type="submit">Create new post</button>
-                        </div>
-					</div>
 				</form>
 			</div>
 		</div>
