@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
 import { GeneralService } from '../../service/general-service.service'
-
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 @Component({
   selector: 'app-view-channel',
   templateUrl: './view-channel.component.html',
@@ -41,11 +41,11 @@ export class ViewChannelComponent implements OnInit {
     console.log(url);
     this.post.image_url = url;
     console.log(this.post);
-    
+
   }
 
   getImagesPixabay(word:string){
-    
+
     this.generalService.getImagesPixabay(word)
     .subscribe(res=>{
       console.log('*******************');
@@ -54,7 +54,7 @@ export class ViewChannelComponent implements OnInit {
       //console.log(datajson.images);
       this.ListImages = datajson.images;
       console.log(this.ListImages);
-      
+
     })
   }
 
@@ -62,7 +62,15 @@ export class ViewChannelComponent implements OnInit {
     console.log("****************************************************")
     this.post.channel_id = this.generalService.user_channel
     console.log(this.post)
-    this.generalService.newPost(this.post)
+    if (!this.post.title || !this.post.content) {
+      Swal.fire({
+        type: 'warning',
+        icon: 'warning',
+        title: 'Required Inputs',
+        text: 'Title input and Content input are required'
+      })
+    }else{
+      this.generalService.newPost(this.post)
       .subscribe(
         res=>{
           console.log(res)
@@ -72,6 +80,9 @@ export class ViewChannelComponent implements OnInit {
           console.log(err)
         }
       )
+    }
+
+
   }
 
   getChannel(){

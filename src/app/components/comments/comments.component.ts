@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GeneralService } from '../../service/general-service.service';
 import { Router } from '@angular/router'
 import { ActivatedRoute } from '@angular/router';
-import Swal from 'sweetalert2/dist/sweetalert2.js';  
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-comments',
@@ -78,7 +78,7 @@ export class CommentsComponent implements OnInit {
       post_id : post_id
     }
     console.log(this.body);
-    
+
     this.generalService.addTagToPost(this.body)
       .subscribe(
         res=>{
@@ -86,7 +86,7 @@ export class CommentsComponent implements OnInit {
           Swal.fire({
             icon: 'success',
             title: 'Post added successfully!'
-          })          
+          })
         },
         err=>{
           console.log(err)
@@ -105,11 +105,24 @@ export class CommentsComponent implements OnInit {
       post_id: id,
       comment: this.comment
     }
-    this.generalService.postComment(comments)
-    .subscribe(res=>{
-      console.log(res)
-      this.getComments()
-    })
+    if (!comments.comment) {
+      Swal.fire({
+        type: 'warning',
+        icon: 'warning',
+        title: 'Required Input',
+        text: 'Comment input is required'
+      })
+    }else{
+      this.generalService.postComment(comments)
+      .subscribe(res=>{
+        console.log(res)
+        this.getComments()
+        this.comment = ""
+      })
+    }
+
+
+
   }
 
   home(){
