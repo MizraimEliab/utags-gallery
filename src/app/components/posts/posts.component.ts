@@ -123,7 +123,6 @@ export class PostsComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: 'Oops...',
-            text: 'Error!'
           })
         }
       )
