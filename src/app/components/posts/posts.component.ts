@@ -41,7 +41,7 @@ export class PostsComponent implements OnInit {
       .subscribe(res =>{
         console.log('los values del user: '+JSON.stringify(res));
         const json = JSON.stringify(res)
-          const datajson = JSON.parse(json);
+        const datajson = JSON.parse(json);
         this.arrUser = datajson
         this.generalService.user_id = this.arrUser[0].user_id
         this.generalService.user_type = this.arrUser[0].usertype     
@@ -139,8 +139,10 @@ export class PostsComponent implements OnInit {
     })
   }
 
-  redirectToComment(){
-    this.router.navigate(['/comments']);
+  redirectToComment(id){
+    // this.generalService.post_id = id;
+    // console.log(this.generalService.post_id)
+    this.router.navigate(['/comments/',id]);
   }
 
 }

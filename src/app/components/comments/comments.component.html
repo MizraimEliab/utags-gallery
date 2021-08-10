@@ -1,1 +1,28 @@
-<p>comments works!</p>
+<div class="card" style="width: 40rem; margin: auto; margin-bottom: 2%;" *ngFor="let item of arrPost" >
+    <img class="card-img-top" src="{{item.image_url}}" alt="Card image cap">
+    <div class="card-body">
+      <a (click)="redirectToComment(item.post_id)"><h1 class="card-title" style="text-align: center;" >{{item.title}}</h1></a>
+      <button class="fixedbutton" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <div *ngFor="let x of arrTags">
+          <button mat-menu-item (click)="addTagToPost(x.tag_id,item.post_id)">
+            <mat-icon >local_offer</mat-icon>
+            <span >{{x.name | titlecase}}</span>
+          </button>
+        </div>
+      </mat-menu>
+      <p class="card-text">{{item.content}}</p>
+    </div>
+    <div class="card-body">
+      <input type="text" [(ngModel)]="comment" name="comment"  class="form-control" placeholder="Type your comment"> <br>
+      <button class="btn btn-primary" style="margin-right: 1%;" (click)="Comment(item.post_id)"><mat-icon style="font-size:15px;">message</mat-icon>Comment</button>
+    </div>
+    <div class="card-footer">
+        <ul class="list-group" *ngFor="let item of arrComments">
+            <li class="list-group-item" >{{item.comment}}</li>
+        </ul>
+    </div>
+</div>
+<br>

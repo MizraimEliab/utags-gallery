@@ -22,7 +22,7 @@
 				<mat-icon mat-list-icon>tv</mat-icon>
 			</mat-list-item>
 			<mat-list-item class="parent">
-				<span class="full-width" *ngIf="isExpanded || isShowing">Favorites</span>
+				<span class="full-width" *ngIf="isExpanded || isShowing" (click)="fav()">Favorites</span>
 				<mat-icon mat-list-icon>star</mat-icon>
 			</mat-list-item>
 			<mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">

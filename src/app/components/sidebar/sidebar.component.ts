@@ -61,6 +61,10 @@ export class SidebarComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  fav(){
+    this.router.navigate(['/favorites'])
+  }
+
   loggedIn(){
     this.logged = this.generalService.loggedIn()
     console.log("Logged: " + this.logged)

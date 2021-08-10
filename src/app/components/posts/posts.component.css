@@ -3,3 +3,7 @@
     right: 70px; 
     
 }
+
+.modal-backdrop {
+    z-index: -1;
+  }

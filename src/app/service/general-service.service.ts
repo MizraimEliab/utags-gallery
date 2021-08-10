@@ -12,6 +12,7 @@ export class GeneralService {
   user_type : number
   user_name: string
   user_channel: any
+  post_id: any
   mytrustedUrl;
 
 
@@ -85,4 +86,8 @@ export class GeneralService {
   getCommetsByPost(post_id){
     return this.http.get<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/comments/'+`${post_id}`)
   }
+  getPostByID(id){
+    return this.http.get<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/posts/'+`${id}`)
+  }
+
 }

@@ -9,6 +9,7 @@ import {ViewChannelComponent} from './components/view-channel/view-channel.compo
 import { PostsComponent } from './components/posts/posts.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { FavComponent } from './components/fav/fav.component';
 
 const routes: Routes = [
 
@@ -46,8 +47,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path:'comments',
+    path:'comments/:id',
     component: CommentsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path:'favorites',
+    component:FavComponent,
     canActivate: [AuthGuard]
   }
 ];
