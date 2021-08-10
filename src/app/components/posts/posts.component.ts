@@ -68,6 +68,17 @@ export class PostsComponent implements OnInit {
       
     })
   }
+
+  addFav(id){
+    let fav = {
+      user_id:this.generalService.user_id,
+      post_id:id
+    }
+    this.generalService.addFav(fav)
+    .subscribe(res=>{
+      console.log(res)
+    })
+  }
   likePost(id){
     this.generalService.postLiked(id)
     .subscribe(res=>{

@@ -19,6 +19,7 @@
   <div class="card-body">
     <button class="btn btn-primary" style="margin-right: 1%;" (click)="likePost(item.post_id)"><mat-icon>thumb_up</mat-icon> {{item.likes}}</button>
     <button class="btn btn-success disabled" style="margin-right: 1%;"><mat-icon>remove_red_eye</mat-icon>{{item.views}}</button>
+    <button class="btn btn-warning" (click) = "addFav(item.post_id)" style="margin-right: 1%;"><mat-icon>star</mat-icon></button>
   </div>
 </div>
 <br><br><br>
