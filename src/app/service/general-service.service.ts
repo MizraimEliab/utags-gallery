@@ -72,6 +72,9 @@ export class GeneralService {
   getTagsUser(id){
     return this.http.get<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/tags/all/'+`${id}`)
   }
+  getTagsPost(tag_id){
+    return this.http.get<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/tags/details/'+`${tag_id}`)
+  }
   addTagToPost(tag){
     return this.http.post<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/tags/insert/tag',tag)
   }
@@ -88,6 +91,18 @@ export class GeneralService {
   }
   getPostByID(id){
     return this.http.get<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/posts/'+`${id}`)
+  }
+
+  addFav(fav){
+    return this.http.post<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/favorites',fav)
+  }
+
+  getFavPost(user_id){
+    return this.http.get<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/favorites/'+`${user_id}`)
+  }
+
+  deleteFavPost(fav_id){
+    return this.http.put<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/favorites/'+`${fav_id}`,'')
   }
 
 }

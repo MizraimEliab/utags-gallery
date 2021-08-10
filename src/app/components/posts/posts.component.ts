@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GeneralService } from '../../service/general-service.service'
 import { Router } from '@angular/router'
-import Swal from 'sweetalert2/dist/sweetalert2.js';  
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-posts',
@@ -44,15 +44,15 @@ export class PostsComponent implements OnInit {
         const datajson = JSON.parse(json);
         this.arrUser = datajson
         this.generalService.user_id = this.arrUser[0].user_id
-        this.generalService.user_type = this.arrUser[0].usertype     
+        this.generalService.user_type = this.arrUser[0].usertype
         this.generalService.user_name = this.arrUser[0].name
-        this.usertype = this.generalService.user_type 
+        this.usertype = this.generalService.user_type
         console.log(this.generalService.user_id);
-        
+
         this.generalService.getChannel(this.userId)
         .subscribe(res=>{
           console.log("ChannelID: " + JSON.stringify(res))
-        })  
+        })
       });
     });
   }
@@ -64,8 +64,19 @@ export class PostsComponent implements OnInit {
       this.arrPost = datajson
       console.log('**********');
       console.log(this.arrPost);
-      
-      
+
+
+    })
+  }
+
+  addFav(id){
+    let fav = {
+      user_id:this.generalService.user_id,
+      post_id:id
+    }
+    this.generalService.addFav(fav)
+    .subscribe(res=>{
+      console.log(res)
     })
   }
   likePost(id){
@@ -97,7 +108,7 @@ export class PostsComponent implements OnInit {
       post_id : post_id
     }
     console.log(this.body);
-    
+
     this.generalService.addTagToPost(this.body)
       .subscribe(
         res=>{
@@ -105,7 +116,7 @@ export class PostsComponent implements OnInit {
           Swal.fire({
             icon: 'success',
             title: 'Post added successfully!'
-          })          
+          })
         },
         err=>{
           console.log(err)
