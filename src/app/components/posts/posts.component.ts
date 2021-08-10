@@ -112,6 +112,7 @@ export class PostsComponent implements OnInit {
       tag_id: tag_id,
       post_id : post_id
     }
+    console.log("*********************")
     console.log(this.body);
 
     this.generalService.addTagToPost(this.body)

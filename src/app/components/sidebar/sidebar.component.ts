@@ -75,6 +75,10 @@ export class SidebarComponent implements OnInit {
     this.generalService.logout();
   }
 
+  redirectToTag(id){
+    this.router.navigate(['/tags/',id]);
+  }
+
   getUserType(){
     this.generalService.getProfile()
     .subscribe(res =>{

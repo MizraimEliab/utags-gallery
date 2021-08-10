@@ -48,6 +48,8 @@ export class CommentsComponent implements OnInit {
   catchID(){
     // this.route.params.subscribe((params: Params) => this.myParam = params['id']);
     this.ID = this.route.snapshot.params.id
+    console.log("...................");
+    console.log(this.ID)
   }
 
   getComments(){

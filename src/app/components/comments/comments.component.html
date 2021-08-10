@@ -45,20 +45,37 @@
   <br><br>
 	<div class="example-sidenav-content">
       <div class="card" style="width: 40rem; margin: auto; margin-bottom: 2%;" *ngFor="let item of arrPost" >
+
+
+
+
+		<div class="card-header">
+			<div class="row">
+			  <div class="col-lg-11 float-left">
+				<h1> {{item.title}} </h1>
+			  </div>
+		
+			  <div class="col-lg-1 float-right">
+				<button class="" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+				  <mat-icon>more_vert</mat-icon>
+				</button>
+				<mat-menu #menu="matMenu">
+				  <div *ngFor="let x of arrTags">
+					<button mat-menu-item (click)="addTagToPost(x.tag_id,item.post_id)">
+					  <mat-icon >local_offer</mat-icon>
+					  <span >{{x.name | titlecase}}</span>
+					</button>
+				  </div>
+				</mat-menu>
+			  </div>
+			</div>
+		  </div>
+
+
+
+
         <img class="card-img-top" src="{{item.image_url}}" alt="Card image cap">
         <div class="card-body">
-          <a  (click)="redirectToComment(item.post_id)"><h1 class="card-title" style="text-align: center;" >{{item.title}}</h1></a>
-          <button class="fixedbutton" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <div *ngFor="let x of arrTags">
-              <button mat-menu-item (click)="addTagToPost(x.tag_id,item.post_id)">
-                <mat-icon >local_offer</mat-icon>
-                <span >{{x.name | titlecase}}</span>
-              </button>
-            </div>
-          </mat-menu>
           <p class="card-text">{{item.content}}</p>
         </div>
         <div class="card-body">
