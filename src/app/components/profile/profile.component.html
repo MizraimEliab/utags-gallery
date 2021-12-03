@@ -1,8 +1,8 @@
-<mat-toolbar color="primary" class="example-toolbar">
-  <button mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button>
-	<h1 class="example-app-name">Gallery</h1>
+<mat-toolbar class="example-toolbar color-nav">
+	<button  mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon [ngStyle]="{'color':'white'}">menu</mat-icon></button>
+	<h1 class="example-app-name txt-title">Publication Gallery</h1>
 	<button mat-button (click)="logOut()" class="fixedbutton">
-		<mat-icon mat-list-icon>exit_to_app</mat-icon>
+		<mat-icon [ngStyle]="{'color':'white'}" mat-list-icon>exit_to_app</mat-icon>
 	</button>
 </mat-toolbar>
 

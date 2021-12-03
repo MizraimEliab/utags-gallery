@@ -1,37 +1,50 @@
 
-
-<mat-toolbar color="primary" class="">
-  <h1 class="example-app-name">Gallery</h1>
-  <button mat-button class="fixedbutton">
-    <button type="button" mat-flat-button color="primary" routerLink="/signin">LogIn</button>
-    <button type="button" mat-flat-button color="primary" routerLink="/signup">SignUp</button>
-  </button>
-</mat-toolbar>
-
-<div class="mt-5">
-    <div class="col-md-4 mx-auto">
-        <div class="card">
-            <div class="card-header text-center">
-                <h2>LogIn</h2>
+  
+<body class="back">
+    <mat-toolbar class="color-nav">
+        <h1 class="txt-title">Publication Gallery</h1>
+        
+            <div class="fixedbutton">
+              <button type="button" class="space" mat-flat-button color="basic" routerLink="/signin">LogIn</button>
+              <button type="button" mat-flat-button color="basic" routerLink="/signup">SignUp</button>
             </div>
-            <div class="card-body">
-                <form (submit)="signIn()">
-                    <div class="form-group form-outline mb-4">
-                        <input type="text" [(ngModel)]="user.email" name="email" class="form-control" placeholder="Email" required>
+    </mat-toolbar>
+
+    <div class="mt-5">
+        
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <div class="card card-size">
+                        <div class="card-header">
+                            <h2>Start with your account</h2>
+                        </div>
+                        <div class="card-body">
+                            <form (submit)="signIn()">
+                                <div class="form-group form-outline mb-4">
+                                    <input  type="text" [(ngModel)]="user.email" name="email" class="form-control " placeholder="Email" required>
+                                </div>
+                                <div class="form-group form-outline mb-4">
+                                    <input  type="password" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Password" required>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button class="btn main-style-btn style-btn" type="submit">Sign In</button>
+                                </div><br>
+                                <div>
+                                    <span><a href="">Forgot your password?</a></span>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="form-group form-outline mb-4">
-                        <input type="password" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Password" required>
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-primary" type="submit">SignIn</button>
-                    </div>
-                </form>
+                </div>
+                <div class="col-4"></div>
             </div>
-        </div>
     </div>
-</div>
+    
+    <!-- <h1>Version V1 is runnning ...</h1> -->
+    
+    <div [innerHtml]="htmlSnippet"></div>
+    
+</body>
 
-<h1>Version V1 is runnning ...</h1>
-
-<div [innerHtml]="htmlSnippet"></div>
 

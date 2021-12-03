@@ -37,3 +37,43 @@
     right: 25px; 
     top: 10px;
   }
+
+.space{
+  margin-right: 4%;
+}
+
+.color-nav{
+background-color: #32a852;
+}
+
+.back{
+  background-image: url("https://cdn.pixabay.com/photo/2017/07/31/11/21/people-2557396_960_720.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.txt-title{
+  font-size:xx-large;
+  color: #fff;
+  font-family: 'Bebas Neue', cursive;
+  text-decoration: none;
+}
+.main-style-btn{
+  background-color: #2A8D45;
+  border-color: #2A8D45;
+  border-style: solid;
+  color: #fff;
+  height: 50px;
+    
+}
+.style-btn:hover{
+  background-color: #fff;
+  color: black;
+}
+.form-control{
+  height: 50px;
+}
+

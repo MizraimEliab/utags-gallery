@@ -60,6 +60,8 @@ export class PostsComponent implements OnInit {
         const json = JSON.stringify(res)
         const datajson = JSON.parse(json);
         this.arrPost = datajson
+        
+        
       }
     },
     err=>{

@@ -1,8 +1,8 @@
-<mat-toolbar color="primary" class="example-toolbar">
-	<button mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon>menu</mat-icon></button>
-	<h1 class="example-app-name">Gallery</h1>
+<mat-toolbar class="example-toolbar color-nav">
+	<button  mat-icon-button (click)="isExpanded = !isExpanded"><mat-icon [ngStyle]="{'color':'white'}">menu</mat-icon></button>
+	<h1 class="example-app-name txt-title">Publication Gallery</h1>
 	<button mat-button (click)="logOut()" class="fixedbutton">
-		<mat-icon mat-list-icon>exit_to_app</mat-icon>
+		<mat-icon [ngStyle]="{'color':'white'}" mat-list-icon>exit_to_app</mat-icon>
 	</button>
 </mat-toolbar>
 
@@ -43,8 +43,8 @@
 	</mat-sidenav>
 	<div class="example-sidenav-content">
         <div *ngIf = "showAddPost">
-            <button mat-fab color="primary" class="text-center m-5"> 
-                <mat-icon mat-list-item data-bs-toggle="modal" data-bs-target="#exampleModal" mat-list-icon>add</mat-icon>
+            <button mat-fab style="background-color: #32a852;"  class="text-center m-5"> 
+                <mat-icon [ngStyle]="{'color':'black'}" mat-list-item data-bs-toggle="modal" data-bs-target="#exampleModal" mat-list-icon>add</mat-icon>
             </button>
         </div>
         

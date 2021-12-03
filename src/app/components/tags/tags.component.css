@@ -40,3 +40,15 @@
   .submenu.expanded {
     transform: scaleY(1);
   }
+
+
+  .color-nav{
+    background-color: #32a852;
+    }
+  
+    .txt-title{
+      font-size:xx-large;
+      color: #fff;
+      font-family: 'Bebas Neue', cursive;
+      text-decoration: none;
+    }

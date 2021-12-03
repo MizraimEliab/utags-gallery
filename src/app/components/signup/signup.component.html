@@ -1,36 +1,41 @@
-<mat-toolbar color="primary" class="">
-  <h1 class="example-app-name">Gallery</h1>
-  <button mat-button class="fixedbutton">
-    <button type="button" mat-flat-button color="primary" routerLink="/signin">LogIn</button>
-    <button type="button" mat-flat-button color="primary" routerLink="/signup">SignUp</button>
-  </button>
-</mat-toolbar>
 
-<div class="mt-5">
-    <div class="col-md-4 mx-auto">
-        <div class="card">
-            <div class="card-header text-center">
-              <h2>SignUp</h2>
-          </div>
-            <div class="card-body">
-                <form (submit)="signUp()">
-                    <div class="form-group form-outline mb-4">
-                        <input type="text" [(ngModel)]="user.name" name="fname" class="form-control" placeholder="Name" required autofocus>
-                    </div>
-                    <div class="form-group form-outline mb-4">
-                        <input type="text" [(ngModel)]="user.lastname" name="lname" class="form-control" placeholder="Last Name" required>
-                    </div>
-                    <div class="form-group form-outline mb-4">
-                        <input type="email" [(ngModel)]="user.email" name="email" class="form-control" placeholder="Email" required>
-                    </div>
-                    <div class="form-group form-outline mb-4">
-                        <input type="password" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Password" required>
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button name="btnS" class="btn btn-primary" type="submit">SignUp</button>
-                    </div>
-                </form>
+<body class="back">
+    <mat-toolbar class="color-nav">
+        <h1 class="txt-title">Publication Gallery</h1>
+        
+            <div class="fixedbutton">
+              <button type="button" class="space" mat-flat-button color="basic" routerLink="/signin">LogIn</button>
+              <button type="button" mat-flat-button color="basic" routerLink="/signup">SignUp</button>
+            </div>
+    </mat-toolbar>
+
+    <div class="mt-5">
+        <div class="col-md-4 mx-auto">
+            <div class="card">
+                <div class="card-header text-center">
+                  <h2>Sign Up</h2>
+              </div>
+                <div class="card-body">
+                    <form (submit)="signUp()">
+                        <div class="form-group form-outline mb-4">
+                            <input type="text" [(ngModel)]="user.name" name="fname" class="form-control" placeholder="Name" required autofocus>
+                        </div>
+                        <div class="form-group form-outline mb-4">
+                            <input type="text" [(ngModel)]="user.lastname" name="lname" class="form-control" placeholder="Last Name" required>
+                        </div>
+                        <div class="form-group form-outline mb-4">
+                            <input type="email" [(ngModel)]="user.email" name="email" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="form-group form-outline mb-4">
+                            <input type="password" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button name="btnS" class="btn main-style-btn style-btn" type="submit">Sign Up</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</body>
+
