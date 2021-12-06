@@ -52,7 +52,7 @@ import { environment } from '../environments/environment';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ServiceWorkerModule.register('./dist/ngsw-worker.js', {
+    ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
