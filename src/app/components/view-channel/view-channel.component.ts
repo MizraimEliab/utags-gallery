@@ -115,9 +115,9 @@ export class ViewChannelComponent implements OnInit {
             title: 'Your post has been posted!',
             showConfirmButton: true,
           })
-          this.router.navigate(['home']).then(() => {
-            window.location.reload();
-          });
+          //this.router.navigate(['home']).then(() => {
+            //window.location.reload();
+          //});
         },
         err=>{
           console.log(err)
