@@ -64,7 +64,7 @@ export class ProfileComponent implements OnInit {
     var options = {
       mimeType: "audio/wav",
       numberOfAudioChannels: 1,
-      sampleRate: 96000,
+      sampleRate: 32000,
     };
     //Start Actuall Recording
     var StereoAudioRecorder = RecordRTC.StereoAudioRecorder;
