@@ -3,7 +3,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router'
 import { GeneralService } from '../../service/general-service.service'
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-
+import { PushNotificationsService} from 'ng-push-ivy';
 @Component({
   selector: 'app-view-channel',
   templateUrl: './view-channel.component.html',
@@ -53,8 +53,10 @@ export class ViewChannelComponent implements OnInit {
     color:'#000000',
   }
 
-  constructor(private generalService : GeneralService, private router : Router) { }
-
+  constructor(private generalService : GeneralService, private router : Router, private _pushNotifications: PushNotificationsService) { 
+    this._pushNotifications.requestPermission();
+  }
+  
   ngOnInit(): void {
     this.getChannel();
     this.getUserType();
@@ -86,6 +88,9 @@ export class ViewChannelComponent implements OnInit {
   }
 
   newPost(){
+    let options = { //set options
+      body: "Post added successfully"
+    }
     this.post.channel_id = this.generalService.user_channel
     if (!this.post.image_url) {
       this.post.image_url = "https://www.smartdatajob.com/images/joomlart/demo/default.jpg";
@@ -101,6 +106,10 @@ export class ViewChannelComponent implements OnInit {
       this.generalService.newPost(this.post)
       .subscribe(
         res=>{
+          this._pushNotifications.create(res.Message, options).subscribe( //creates a notification
+            res => console.log(res),
+            err => console.log(err)
+          );
           Swal.fire({
             icon: 'success',
             title: 'Your post has been posted!',
