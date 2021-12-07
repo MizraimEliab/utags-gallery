@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GeneralService } from '../../service/general-service.service'
 import { Router } from '@angular/router'
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { SwPush } from '@angular/service-worker';
 
 @Component({
   selector: 'app-posts',
@@ -9,7 +10,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-
+  readonly VAPID_PUBLIC_KEY = "BMC8_RwgnIKziOvmLwJ3P59jQ7NhNpkTHVmdMrwqa13O1Za5UCpWYwT7NS-ETMK3Hg6u-pry0RgMdCJvfrrL0k0"
   usertype : number
   userId : number
   userChannel: boolean
@@ -24,11 +25,12 @@ export class PostsComponent implements OnInit {
 
   showPosts: boolean
 
-  constructor(private generalService : GeneralService, private router: Router) { }
+  constructor(private generalService : GeneralService, private router: Router,private swPush: SwPush) { }
 
   ngOnInit(): void {
     this.getUser();
     this.getPosts();
+    //this.subscribeToNotifications();
   }
 
   getUser(){
@@ -48,6 +50,8 @@ export class PostsComponent implements OnInit {
       });
     });
   }
+
+  
 
   getPosts(){
     this.generalService.getPosts()

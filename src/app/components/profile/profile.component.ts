@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { GeneralService } from '../../service/general-service.service'
 import { Router } from '@angular/router'
-import Swal from 'sweetalert2/dist/sweetalert2.js'; 
+import * as RecordRTC from 'recordrtc';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -10,6 +12,17 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
+  title = 'micRecorder';
+
+  //Lets declare Record OBJ
+  record;
+  //Will use this flag for toggeling recording
+  recording = false;
+  //URL of Blob
+  url;
+  error;
+  
   @ViewChild('sidenav') sidenav: MatSidenav;
   usertype : number
   userId : number
@@ -30,8 +43,56 @@ export class ProfileComponent implements OnInit {
     color:'#000000',
   }
 
-  constructor(private generalService : GeneralService, private router: Router) { }
+  constructor(private generalService : GeneralService, private router: Router ,private domSanitizer: DomSanitizer) { }
+  sanitize(url: string) {
+    return this.domSanitizer.bypassSecurityTrustUrl(url);
+  }
 
+  // audio
+  initiateRecording() {
+
+    this.recording = true;
+    let mediaConstraints = {
+      video: false,
+      audio: true
+    };
+    navigator.mediaDevices
+      .getUserMedia(mediaConstraints)
+      .then(this.successCallback.bind(this), this.errorCallback.bind(this));
+  }
+  successCallback(stream) {
+    var options = {
+      mimeType: "audio/wav",
+      numberOfAudioChannels: 1,
+      sampleRate: 16000,
+    };
+    //Start Actuall Recording
+    var StereoAudioRecorder = RecordRTC.StereoAudioRecorder;
+    this.record = new StereoAudioRecorder(stream, options);
+    this.record.record();
+  }
+
+  stopRecording() {
+    this.recording = false;
+    this.record.stop(this.processRecording.bind(this));
+  }
+
+  /**
+   * processRecording Do what ever you want with blob
+   * @param  {any} blob Blog
+   */
+
+  processRecording(blob) {
+    this.url = URL.createObjectURL(blob);
+    console.log("blob", blob);
+    console.log("url", this.url);
+  }
+
+  errorCallback(error) {
+    this.error = 'Can not play audio in your browser';
+  }
+  
+  // termina audio
   ngOnInit(): void {
     this.getUser();
     this.getUserType();

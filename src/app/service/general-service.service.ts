@@ -120,4 +120,8 @@ export class GeneralService {
     return this.http.get<any>(this.mytrustedUrl.changingThisBreaksApplicationSecurity+'/tags/'+`${tag_id}`)
   }
 
+  addPushSubscriber(sub:any){
+
+  }
+
 }

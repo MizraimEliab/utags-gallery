@@ -54,7 +54,18 @@
 								<p *ngIf="usertype == 1" class="text-muted font-size-sm">User type: <bold>Admin</bold></p>
 								<p *ngIf="usertype == 2" class="text-muted font-size-sm">User type: <bold>Student</bold></p>    
 								<br>
-								<p>AppGallery v.1.0 Public Beta</p>               
+								<p>AppGallery v.1.0 Public Beta</p>
+								<!-- el microfono-->
+								<div style="text-align:center;margin-top: 200px;" >
+									<button (click)="initiateRecording()" class="btn btn-primary" *ngIf="!recording" style="cursor: pointer;background-color: green;color: white;font-size: 40px;"> Start Recording </button>
+									  <button (click)="stopRecording()" class="btn btn-danger" *ngIf="recording" style="cursor: pointer;background-color: red;color: white;font-size: 40px;"> Stop Recording </button>
+									  <div class="clearfix"></div>
+									  <audio controls="" *ngIf="url">
+										  <source [src]="sanitize(url)" type="audio/wav">
+									  </audio>
+								  </div>
+									
+									
 							</div>
 							</div>
 						</div>
